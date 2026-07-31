@@ -101,13 +101,12 @@ const HomePage = () => {
             <button onClick={() => scrollToSection('destinations')} className="transition hover:text-emerald-400">Destinations</button>
             <button onClick={() => scrollToSection('why-us')} className="transition hover:text-emerald-400">Why Us</button>
             <button onClick={() => scrollToSection('faq')} className="transition hover:text-emerald-400">FAQ</button>
-            <button onClick={openDriverRegistrationWhatsApp} className="font-bold text-emerald-300 transition hover:text-emerald-200 bg-emerald-500/20 px-3.5 py-1 rounded-full ring-1 ring-emerald-400/40">Driver &amp; Car Registration</button>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={openDriverRegistrationWhatsApp}
-              className="hidden sm:inline-block rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20"
+              className="hidden sm:inline-block rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20 border border-white/10"
             >
               Driver &amp; Car Registration
             </button>
