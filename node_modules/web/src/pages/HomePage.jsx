@@ -532,14 +532,14 @@ const HomePage = () => {
       </footer>
       {/* 10. Sticky Floating WhatsApp Button */}
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I am interested in booking a Singapore-Johor cross-border taxi ride.\n\nPlease share availability and rates.')}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Singapore-Johor cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label="Ask a Question on WhatsApp"
         className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-3 rounded-full bg-emerald-500 px-4 sm:px-5 py-3 sm:py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-slate-950/20 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
       >
         <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-slate-950" />
-        <span className="text-xs sm:text-sm font-extrabold">WhatsApp Booking</span>
+        <span className="text-xs sm:text-sm font-extrabold">Ask a Question</span>
       </a>
     </div>
   );
