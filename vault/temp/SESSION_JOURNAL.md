@@ -937,3 +937,45 @@
         at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
         at App
 
+## 2026-07-31 18:27:04.995Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785522423750:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 18:27:10.996Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785522430708:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 18:27:15.996Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785522435515:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
