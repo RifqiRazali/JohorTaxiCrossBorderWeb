@@ -280,7 +280,7 @@ const HomePage = () => {
                       <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-slate-700 bg-slate-100 rounded-md px-2 py-1"><Car className="h-3.5 w-3.5 text-emerald-600" />{car.plateNumber}</span>
                     )}
                   </div>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{car.desc}</p>
+                  {car.desc && <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{car.desc}</p>}
                   
                   {/* Clean Single-Line WhatsApp CTA Button */}
                   <button
