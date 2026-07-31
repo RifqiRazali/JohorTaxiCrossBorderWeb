@@ -1885,3 +1885,13 @@
 ## 2026-07-31 21:25:11.338Z click
 - element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Book via WhatsApp"}
 
+## 2026-07-31 21:32:35.506Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"View Johor-SG Taxis & Drivers"}
+
+## 2026-07-31 21:34:43.995Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Johor ⟶ Singapore & All DestinationsJohor ⟶ Singapore Door-To-Door Cross-Border TaxiComfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). Stay inside the taxi at Woodlands & Tuas customs — no lugging bags through immigration counters.View Johor-SG Taxis & DriversWoodlands & Tuas Clearance IncludedStay in TaxiAt SG-MY CustomsFixed FaresTolls IncludedAll JohorDestinations Covered"}
+
+## 2026-07-31 21:38:18.614Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
