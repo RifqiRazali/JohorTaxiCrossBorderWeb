@@ -61,6 +61,11 @@ Please review my vehicle registration for the Taxi Johor Cross Border website.`;
       <Helmet>
         <title>Driver &amp; Vehicle Registration | Taxi Johor Cross Border</title>
         <meta name="description" content="Register your licensed Singapore-Johor cross-border taxi or vehicle to join the Taxi Johor Cross Border network and receive direct passenger bookings." />
+        <link rel="canonical" href="https://taxijohorcrossborder.com/register-driver" />
+        <meta property="og:title" content="Driver &amp; Vehicle Registration | Taxi Johor Cross Border" />
+        <meta property="og:description" content="Register your licensed Singapore-Johor cross-border taxi or vehicle to join the Taxi Johor Cross Border network." />
+        <meta property="og:url" content="https://taxijohorcrossborder.com/register-driver" />
+        <meta property="og:site_name" content="Taxi Johor Cross Border" />
       </Helmet>
 
       {/* Header */}

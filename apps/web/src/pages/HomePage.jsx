@@ -63,6 +63,15 @@ const HomePage = () => {
       <Helmet>
         <title>Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service</title>
         <meta name="description" content="Taxi Johor Cross Border provides official Singapore ↔ Johor cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations. Airport transfers, corporate jobs, private tours & outstation trips." />
+        <link rel="canonical" href="https://taxijohorcrossborder.com/" />
+        <meta property="og:title" content="Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service" />
+        <meta property="og:description" content="Taxi Johor Cross Border provides official Singapore ↔ Johor cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations." />
+        <meta property="og:url" content="https://taxijohorcrossborder.com/" />
+        <meta property="og:site_name" content="Taxi Johor Cross Border" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service" />
+        <meta name="twitter:description" content="Official Singapore ↔ Johor cross-border taxi transfers. Airport transfers, corporate jobs, private tours & outstation trips." />
         <link rel="icon" type="image/png" href="/images/logo.png" />
       </Helmet>
 

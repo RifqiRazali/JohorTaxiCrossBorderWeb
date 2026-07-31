@@ -598,3 +598,11 @@
 - url: http://localhost:3000/
 - via: replaceState
 
+## 2026-07-31 15:57:46.530Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service
+
+## 2026-07-31 15:57:46.621Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
