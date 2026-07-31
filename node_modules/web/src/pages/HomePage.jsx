@@ -16,13 +16,13 @@ const openDriverWhatsApp = (car) => {
   }
   const driverText = car.driverName ? ` (Driver: ${car.driverName})` : '';
   const plateText = car.plateNumber ? ` [Plate: ${car.plateNumber}]` : '';
-  const text = `Hello! I am interested in booking the Singapore-Johor Taxi *${car.name}* (${car.rate})${driverText}${plateText}.\n\nPlease let me know availability and details for my travel date.`;
+  const text = `Hello! I am interested in booking the Johor ⟶ Singapore Taxi *${car.name}* (${car.rate})${driverText}${plateText}.\n\nPlease let me know availability and details for my travel date.`;
   const url = `https://wa.me/${targetNumber}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 };
 
 const openDestinationWhatsApp = (dest) => {
-  const text = `Hello! I am interested in a Singapore-Johor taxi transfer to/from *${dest.name}* (${dest.location}).\n\nPlease quote the fare and availability.`;
+  const text = `Hello! I am interested in a Johor ⟶ Singapore taxi transfer to/from *${dest.name}* (${dest.location}).\n\nPlease quote the fare and availability.`;
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 };
@@ -152,7 +152,7 @@ const HomePage = () => {
 
       {/* 2. Hero Section */}
       <section className="relative min-h-[100dvh] w-full overflow-hidden">
-        <img src={HERO_IMG} alt="Singapore to Johor highway cross-border taxi" decoding="async" fetchpriority="high" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={HERO_IMG} alt="Johor to Singapore highway cross-border taxi" decoding="async" fetchpriority="high" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/90 to-emerald-950/80" />
         <div className="relative mx-auto flex min-h-[100dvh] max-w-[90rem] flex-col justify-center px-5 pb-28 pt-32 sm:px-8">
           <motion.div
@@ -262,7 +262,7 @@ const HomePage = () => {
                 <div className="relative overflow-hidden bg-slate-100">
                   <img
                     src={typeof car.image === 'string' ? car.image : (car.image?.default || car.image)}
-                    alt={`${car.name} Singapore Johor cross border taxi`}
+                    alt={`${car.name} Johor to Singapore cross border taxi`}
                     loading="lazy"
                     className={`h-52 w-full transition-transform duration-500 group-hover:scale-105 ${car.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover'} ${car.imagePosition ? `object-${car.imagePosition}` : 'object-center'}`}
                   />
@@ -304,7 +304,7 @@ const HomePage = () => {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Popular Cross-Border Routes</p>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Top Tourist Destinations</h2>
-              <p className="mt-3 text-slate-600 text-lg max-w-xl">We provide direct door-to-door taxi transfers between any location in Singapore and popular Johor attractions.</p>
+              <p className="mt-3 text-slate-600 text-lg max-w-xl">We provide direct door-to-door taxi transfers from Johor to Singapore and popular attractions.</p>
             </div>
             
             {/* Tab Selector */}
@@ -362,7 +362,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 6. Why SG-Johor Travellers Choose Us (Accurate & Professional Feature Grid) */}
+      {/* 6. Why Johor ⟶ Singapore Travellers Choose Us (Accurate & Professional Feature Grid) */}
       <section id="why-us" className="scroll-mt-16 bg-slate-50 py-24 sm:py-32">
         <div className="mx-auto max-w-[85rem] px-5 sm:px-8">
           <div className="text-center max-w-3xl mx-auto">
@@ -373,7 +373,7 @@ const HomePage = () => {
               Why Passengers Choose Our Service
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Reliable door-to-door cross-border taxi transfers between Singapore and all regions across Johor.
+              Reliable door-to-door cross-border taxi transfers from Johor to Singapore.
             </p>
           </div>
 
@@ -400,7 +400,7 @@ const HomePage = () => {
               {
                 icon: ShieldCheck,
                 title: 'Licensed Cross-Border Fleet',
-                desc: 'Cross-border taxis with experienced drivers familiar with Singapore and Johor highway routes.',
+                desc: 'Cross-border taxis with experienced drivers familiar with Johor and Singapore highway routes.',
                 badge: 'Permitted Fleet'
               },
               {
@@ -412,7 +412,7 @@ const HomePage = () => {
               {
                 icon: MapPin,
                 title: 'Door-To-Door Pick Up',
-                desc: 'Direct pick-up from your location in Singapore and drop-off at your specified destination in Johor.',
+                desc: 'Direct pick-up from your location in Johor and drop-off at your specified destination in Singapore.',
                 badge: 'Direct Transfers'
               },
             ].map(({ icon: Icon, title, desc, badge }) => (
@@ -476,7 +476,7 @@ const HomePage = () => {
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Got Questions?</p>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Frequently Asked Questions</h2>
-            <p className="mt-3 text-slate-600 text-lg">Everything you need to know about Singapore ↔ Johor cross-border taxi rides.</p>
+            <p className="mt-3 text-slate-600 text-lg">Everything you need to know about Johor ⟶ Singapore cross-border taxi rides.</p>
           </div>
 
           <div className="mt-12 divide-y divide-slate-200 border-y border-slate-200">
@@ -532,7 +532,7 @@ const HomePage = () => {
       </footer>
       {/* 10. Sticky Floating WhatsApp Button */}
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Singapore-Johor cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Johor ⟶ Singapore cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Ask a Question on WhatsApp"

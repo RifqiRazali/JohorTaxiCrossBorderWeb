@@ -1239,3 +1239,609 @@
         at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
         at App
 
+## 2026-07-31 21:07:23.343Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-07-31 21:07:23.345Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:25.050Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Select Taxi for Trip"}
+
+## 2026-07-31 21:07:26.528Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor Attractions"}
+
+## 2026-07-31 21:07:26.530Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:27.960Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Select Taxi for Trip"}
+
+## 2026-07-31 21:07:38.048Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-07-31 21:07:38.050Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:41.827Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-07-31 21:07:41.829Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:42.534Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Are Singapore/Malaysia highway tolls, VEP, and checkpoint fees included in the price?"}
+
+## 2026-07-31 21:07:42.536Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:43.298Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Are Singapore/Malaysia highway tolls, VEP, and checkpoint fees included in the price?"}
+
+## 2026-07-31 21:07:43.300Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:43.764Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Can I request custom pick-up addresses anywhere in Singapore or Johor?"}
+
+## 2026-07-31 21:07:43.765Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:44.393Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Can I request custom pick-up addresses anywhere in Singapore or Johor?"}
+
+## 2026-07-31 21:07:44.394Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:44.721Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Can I request custom pick-up addresses anywhere in Singapore or Johor?"}
+
+## 2026-07-31 21:07:44.722Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:45.199Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Yes, we provide door-to-door service! Pick-up can be any residential address, hotel, office, or airport terminal in Singapore or anywhere across Johor State."}
+
+## 2026-07-31 21:07:45.719Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"How do I confirm my booking and pay?"}
+
+## 2026-07-31 21:07:45.721Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:07:46.419Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"How do I confirm my booking and pay?"}
+
+## 2026-07-31 21:07:46.421Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:14.247Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"How do I confirm my booking and pay?"}
+
+## 2026-07-31 21:08:14.836Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"How do I confirm my booking and pay?"}
+
+## 2026-07-31 21:08:14.839Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:15.294Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"How do I confirm my booking and pay?"}
+
+## 2026-07-31 21:08:15.295Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:15.836Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Can I request custom pick-up addresses anywhere in Singapore or Johor?"}
+
+## 2026-07-31 21:08:15.837Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:16.248Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Can I request custom pick-up addresses anywhere in Singapore or Johor?"}
+
+## 2026-07-31 21:08:16.249Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:17.131Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Are Singapore/Malaysia highway tolls, VEP, and checkpoint fees included in the price?"}
+
+## 2026-07-31 21:08:17.132Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:17.549Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Are Singapore/Malaysia highway tolls, VEP, and checkpoint fees included in the price?"}
+
+## 2026-07-31 21:08:17.550Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:18.102Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-07-31 21:08:18.103Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:18.473Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-07-31 21:08:18.474Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:08:46.227Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Comfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). Stay inside the taxi at Woodlands & Tuas customs — no lugging bags through immigration counters."}
+
+## 2026-07-31 21:08:46.568Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Comfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). Stay inside the taxi at Woodlands & Tuas customs — no lugging bags through immigration counters."}
+
+## 2026-07-31 21:08:47.885Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Johor ⟶ Singapore & All DestinationsJohor ⟶ Singapore Door-To-Door Cross-Border TaxiComfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). Stay inside the taxi at Woodlands & Tuas customs — no lugging bags through immigration counters.View Johor-SG Taxis & DriversWoodlands & Tuas Clearance IncludedStay in TaxiAt SG-MY CustomsFixed FaresTolls IncludedAll JohorDestinations Covered"}
+
+## 2026-07-31 21:08:48.707Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Comfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). Stay inside the taxi at Woodlands & Tuas customs — no lugging bags through immigration counters."}
+
+## 2026-07-31 21:08:52.914Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Johor ⟶ Singapore & All DestinationsJohor ⟶ Singapore Door-To-Door Cross-Border TaxiComfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). Stay inside the taxi at Woodlands & Tuas customs — no lugging bags through immigration counters.View Johor-SG Taxis & DriversWoodlands & Tuas Clearance IncludedStay in TaxiAt SG-MY CustomsFixed FaresTolls IncludedAll JohorDestinations Covered"}
+
+## 2026-07-31 21:09:30.829Z click
+- element: {"tag":"h1","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore Door-To-Door Cross-Border Taxi"}
+
+## 2026-07-31 21:11:05.155Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-07-31 21:11:05.156Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785531949402:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:12:34.056Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532353692:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:13:11.289Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service
+
+## 2026-07-31 21:13:11.361Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532353692:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:13:38.064Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532417845:133:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:13:57.084Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"34"}
+
+## 2026-07-31 21:13:57.738Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"35"}
+
+## 2026-07-31 21:13:58.377Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"34"}
+
+## 2026-07-31 21:13:59.020Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"45"}
+
+## 2026-07-31 21:13:59.619Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"56"}
+
+## 2026-07-31 21:14:00.388Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"46"}
+
+## 2026-07-31 21:14:00.995Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"57"}
+
+## 2026-07-31 21:14:01.983Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Like this item","name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"35"}
+
+## 2026-07-31 21:14:13.541Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532453364:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:14:17.346Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-07-31 21:14:17.347Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532453364:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:14:17.829Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor Attractions"}
+
+## 2026-07-31 21:14:17.831Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532453364:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:14:19.953Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-07-31 21:14:19.955Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532453364:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:18:23.067Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532701977:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:18:24.062Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532703790:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:18:27.055Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532706414:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:18:30.055Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532709072:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:18:34.054Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532713233:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:18:35.064Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532714748:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:20:11.059Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532810290:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:20:25.277Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
