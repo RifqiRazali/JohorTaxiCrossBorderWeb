@@ -1845,3 +1845,43 @@
 ## 2026-07-31 21:20:25.277Z click
 - element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
 
+## 2026-07-31 21:21:44.998Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-07-31 21:21:45.001Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532810290:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:21:45.547Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-07-31 21:21:45.549Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s toyota innova razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785532810290:59:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8ddb1f90:10816:3)
+        at App
+
+## 2026-07-31 21:22:21.957Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"destinations","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Popular Cross-Border RoutesTop Tourist DestinationsWe provide direct door-to-door taxi transfers from Johor to Singapore and popular attractions.Johor AttractionsSingapore AttractionsAirport & TransitChangi Airport & Jewel Changi, SingaporeSelect Taxi for TripIconic LandmarkMarina Bay Sands & Gardens by the Bay Marina Bay, SingaporeSelect Taxi for TripTheme Park & ResortResorts World Sentosa & USS Sentosa Island, SingaporeSelect Taxi for TripShopping & DiningOrchard Road Shopping Belt Orchard, SingaporeSelect Taxi for Trip"}
+
+## 2026-07-31 21:25:11.338Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Book via WhatsApp"}
+

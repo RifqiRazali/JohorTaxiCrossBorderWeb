@@ -249,7 +249,7 @@ const HomePage = () => {
             <p className="mt-4 text-lg text-slate-600">Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.</p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {FLEET.map((car, i) => (
               <motion.article
                 key={car.id || car.name}
@@ -257,7 +257,7 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
-                className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_2px_20px_-8px_rgba(15,42,35,0.25)] ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(15,42,35,0.4)]"
+                className="group flex flex-col h-full overflow-hidden rounded-3xl bg-white shadow-[0_2px_20px_-8px_rgba(15,42,35,0.25)] ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(15,42,35,0.4)]"
               >
                 <div className="relative overflow-hidden bg-slate-100">
                   <img
@@ -268,21 +268,23 @@ const HomePage = () => {
                   />
                   <span className="absolute left-4 top-4 rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur">{car.rate}</span>
                 </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-xl font-bold text-slate-900">{car.name}</h3>
-                  <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
-                    {car.driverName && (
-                      <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-800 bg-emerald-50 rounded-md px-2 py-1"><User className="h-3.5 w-3.5 text-emerald-600" />Driver: {car.driverName}</span>
-                    )}
-                    <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Users className="h-3.5 w-3.5 text-emerald-600" />{car.seats}</span>
-                    <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Briefcase className="h-3.5 w-3.5 text-emerald-600" />{car.luggage}</span>
-                    {car.plateNumber && (
-                      <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-slate-700 bg-slate-100 rounded-md px-2 py-1"><Car className="h-3.5 w-3.5 text-emerald-600" />{car.plateNumber}</span>
-                    )}
+                <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
+                  <div>
+                    <h3 className="font-display text-xl font-bold text-slate-900">{car.name}</h3>
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
+                      {car.driverName && (
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-800 bg-emerald-50 rounded-md px-2 py-1"><User className="h-3.5 w-3.5 text-emerald-600 shrink-0" />Driver: {car.driverName}</span>
+                      )}
+                      <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Users className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.seats}</span>
+                      <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Briefcase className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.luggage}</span>
+                      {car.plateNumber && (
+                        <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-slate-700 bg-slate-100 rounded-md px-2 py-1"><Car className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.plateNumber}</span>
+                      )}
+                    </div>
+                    {car.desc && <p className="mt-4 text-sm leading-relaxed text-slate-600">{car.desc}</p>}
                   </div>
-                  {car.desc && <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">{car.desc}</p>}
                   
-                  {/* Clean Single-Line WhatsApp CTA Button */}
+                  {/* Fixed Bottom-Aligned WhatsApp CTA Button */}
                   <button
                     onClick={() => openDriverWhatsApp(car)}
                     className="mt-6 flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition duration-200 hover:bg-emerald-700 active:scale-[0.98]"
