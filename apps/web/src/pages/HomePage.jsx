@@ -264,7 +264,7 @@ const HomePage = () => {
                     src={typeof car.image === 'string' ? car.image : (car.image?.default || car.image)}
                     alt={`${car.name} Singapore Johor cross border taxi`}
                     loading="lazy"
-                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={`h-52 w-full transition-transform duration-500 group-hover:scale-105 ${car.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover'} ${car.imagePosition ? `object-${car.imagePosition}` : 'object-center'}`}
                   />
                   <span className="absolute left-4 top-4 rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur">{car.rate}</span>
                 </div>
