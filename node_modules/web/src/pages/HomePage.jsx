@@ -27,6 +27,12 @@ const openDestinationWhatsApp = (dest) => {
   window.open(url, '_blank', 'noopener,noreferrer');
 };
 
+const openDriverRegistrationWhatsApp = () => {
+  const text = `Hello! I am a licensed cross-border taxi driver and I would like to register my vehicle to join the Taxi Johor Cross Border network.\n\nPlease guide me on how to list my car on your website.`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
+
 const FAQS = [
   {
     q: 'Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?',
@@ -95,16 +101,16 @@ const HomePage = () => {
             <button onClick={() => scrollToSection('destinations')} className="transition hover:text-emerald-400">Destinations</button>
             <button onClick={() => scrollToSection('why-us')} className="transition hover:text-emerald-400">Why Us</button>
             <button onClick={() => scrollToSection('faq')} className="transition hover:text-emerald-400">FAQ</button>
-            <Link to="/register-driver" className="font-bold text-emerald-300 transition hover:text-emerald-200 bg-emerald-500/20 px-3 py-1 rounded-full ring-1 ring-emerald-400/40">Driver Join</Link>
+            <button onClick={openDriverRegistrationWhatsApp} className="font-bold text-emerald-300 transition hover:text-emerald-200 bg-emerald-500/20 px-3.5 py-1 rounded-full ring-1 ring-emerald-400/40">Driver Register via WhatsApp</button>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              to="/register-driver"
+            <button
+              onClick={openDriverRegistrationWhatsApp}
               className="hidden sm:inline-block rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20"
             >
-              Register Car
-            </Link>
+              Register Car via WhatsApp
+            </button>
             <button
               onClick={() => scrollToSection('fleet')}
               className="rounded-full bg-emerald-500 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
@@ -136,10 +142,10 @@ const HomePage = () => {
               <button onClick={() => { scrollToSection('destinations'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Popular Destinations</button>
               <button onClick={() => { scrollToSection('why-us'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Why Choose Us</button>
               <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">FAQ</button>
-              <Link to="/register-driver" onClick={() => setMobileMenuOpen(false)} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
-                <span>Driver &amp; Car Registration</span>
-                <ArrowRight className="h-5 w-5 text-emerald-400" />
-              </Link>
+              <button onClick={() => { openDriverRegistrationWhatsApp(); setMobileMenuOpen(false); }} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
+                <span>Driver Car Registration (WhatsApp)</span>
+                <MessageCircle className="h-5 w-5 text-emerald-400" />
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
