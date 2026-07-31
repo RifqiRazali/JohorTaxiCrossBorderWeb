@@ -68,17 +68,17 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-emerald-200">
       <Helmet>
-        <title>Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service</title>
-        <meta name="description" content="Taxi Johor Cross Border provides official Singapore ↔ Johor cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations. Airport transfers, corporate jobs, private tours & outstation trips." />
+        <title>Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service</title>
+        <meta name="description" content="Taxi Johor Cross Border provides official Johor ⟶ Singapore cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations. Airport transfers, corporate jobs, private tours &amp; outstation trips." />
         <link rel="canonical" href="https://taxijohorcrossborder.com/" />
-        <meta property="og:title" content="Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service" />
-        <meta property="og:description" content="Taxi Johor Cross Border provides official Singapore ↔ Johor cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations." />
+        <meta property="og:title" content="Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service" />
+        <meta property="og:description" content="Taxi Johor Cross Border provides official Johor ⟶ Singapore cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations." />
         <meta property="og:url" content="https://taxijohorcrossborder.com/" />
         <meta property="og:site_name" content="Taxi Johor Cross Border" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Taxi Johor Cross Border | Singapore ↔ Johor Taxi Service" />
-        <meta name="twitter:description" content="Official Singapore ↔ Johor cross-border taxi transfers. Airport transfers, corporate jobs, private tours & outstation trips." />
+        <meta name="twitter:title" content="Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service" />
+        <meta name="twitter:description" content="Official Johor ⟶ Singapore cross-border taxi transfers. Airport transfers, corporate jobs, private tours &amp; outstation trips." />
         <link rel="icon" type="image/png" href="/images/logo.png" />
       </Helmet>
 
@@ -91,7 +91,7 @@ const HomePage = () => {
             </div>
             <div>
               <span className="font-display text-base sm:text-2xl font-extrabold tracking-tight block leading-tight text-white">Taxi Johor Cross Border</span>
-              <span className="text-[11px] sm:text-sm text-emerald-400 font-semibold tracking-wide block">Singapore ↔ Johor Taxi</span>
+              <span className="text-[11px] sm:text-sm text-emerald-400 font-semibold tracking-wide block">Johor ⟶ Singapore Taxi</span>
             </div>
           </div>
           
@@ -114,7 +114,7 @@ const HomePage = () => {
               onClick={() => scrollToSection('fleet')}
               className="rounded-full bg-emerald-500 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
             >
-              Select SG-Johor Taxi
+              Select Johor-SG Taxi
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -160,24 +160,24 @@ const HomePage = () => {
             className="max-w-3xl"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 ring-1 ring-emerald-400/50">
-              <MapPin className="h-3.5 w-3.5" /> Singapore ↔ All Johor Destinations
+              <MapPin className="h-3.5 w-3.5" /> Johor ⟶ Singapore &amp; All Destinations
             </span>
             <h1 className="mt-5 sm:mt-6 font-display text-3xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] sm:leading-[1.03] tracking-tight text-white">
-              Singapore ↔ Johor{' '}
+              Johor ⟶ Singapore{' '}
               <span className="relative inline-block text-emerald-400">
                 Door-To-Door
               </span>{' '}
               Cross-Border Taxi
             </h1>
             <p className="mt-5 sm:mt-7 max-w-xl text-base sm:text-xl leading-relaxed text-slate-100">
-              Comfortable direct taxi transfers between Singapore and all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing &amp; more). <strong className="text-white">Stay inside the taxi at Woodlands &amp; Tuas customs</strong> — no lugging bags through immigration counters.
+              Comfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing &amp; more). <strong className="text-white">Stay inside the taxi at Woodlands &amp; Tuas customs</strong> — no lugging bags through immigration counters.
             </p>
             <div className="mt-7 sm:mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 onClick={() => scrollToSection('fleet')}
                 className="group inline-flex min-h-[50px] sm:min-h-[52px] items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 sm:px-8 text-sm sm:text-base font-bold text-slate-950 shadow-xl shadow-emerald-500/25 transition hover:bg-emerald-400 active:scale-[0.98]"
               >
-                View SG-Johor Taxis &amp; Drivers
+                View Johor-SG Taxis &amp; Drivers
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
               <span className="text-xs sm:text-sm font-medium text-slate-200 text-center sm:text-left">Woodlands &amp; Tuas Clearance Included</span>
@@ -244,9 +244,9 @@ const HomePage = () => {
       <section id="fleet" className="scroll-mt-16 bg-slate-50 py-20 sm:py-28">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Singapore ↔ Johor Fleet</p>
-            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Pick your SG-Johor taxi &amp; chat on WhatsApp</h2>
-            <p className="mt-4 text-lg text-slate-600">Every rate below covers the full door-to-door taxi trip between Singapore and any destination in Johor: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Johor ⟶ Singapore Fleet</p>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Pick your Johor-SG taxi &amp; chat on WhatsApp</h2>
+            <p className="mt-4 text-lg text-slate-600">Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.</p>
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
@@ -517,14 +517,14 @@ const HomePage = () => {
             </div>
             <div>
               <p className="font-display text-2xl font-extrabold text-white leading-none">Taxi Johor Cross Border</p>
-              <p className="mt-2 max-w-sm text-sm leading-relaxed">Singapore ↔ Johor cross-border taxi service. Connect directly with taxi drivers 24 hours a day.</p>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed">Johor ⟶ Singapore cross-border taxi service. Connect directly with taxi drivers 24 hours a day.</p>
               <p className="mt-3 text-[11px] text-slate-500 max-w-md leading-relaxed">
                 *Disclaimer: Taxi Johor Cross Border operates as an online booking directory and dispatch service connecting passengers directly with licensed Singapore (LTA) &amp; Malaysia (APAD) cross-border transport operators.
               </p>
             </div>
           </div>
           <div className="text-sm">
-            <p className="font-semibold text-white">SG-Johor Taxi Dispatch</p>
+            <p className="font-semibold text-white">Johor ⟶ Singapore Taxi Dispatch</p>
             <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+60 13-872 8630</a>
             <p className="mt-4 text-xs text-slate-500">© {new Date().getFullYear()} Taxi Johor Cross Border. All rights reserved.</p>
           </div>
