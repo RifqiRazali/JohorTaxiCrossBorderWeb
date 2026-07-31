@@ -15,8 +15,7 @@ const openDriverWhatsApp = (car) => {
     return;
   }
   const driverText = car.driverName ? ` (Driver: ${car.driverName})` : '';
-  const plateText = car.plateNumber ? ` [Plate: ${car.plateNumber}]` : '';
-  const text = `Hello! I am interested in booking the Johor ⟶ Singapore Taxi *${car.name}* (${car.rate})${driverText}${plateText}.\n\nPlease let me know availability and details for my travel date.`;
+  const text = `Hello! I am interested in booking the Johor ⟶ Singapore Taxi *${car.name}* (${car.rate})${driverText}.\n\nPlease let me know availability and details for my travel date.`;
   const url = `https://wa.me/${targetNumber}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 };
@@ -277,9 +276,7 @@ const HomePage = () => {
                       )}
                       <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Users className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.seats}</span>
                       <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Briefcase className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.luggage}</span>
-                      {car.plateNumber && (
-                        <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-slate-700 bg-slate-100 rounded-md px-2 py-1"><Car className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.plateNumber}</span>
-                      )}
+                      <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-700 bg-emerald-50/80 border border-emerald-200/60 rounded-md px-2 py-1"><ShieldCheck className="h-3.5 w-3.5 text-emerald-600 shrink-0" />Licensed Taxi</span>
                     </div>
                     {car.desc && <p className="mt-4 text-sm leading-relaxed text-slate-600">{car.desc}</p>}
                   </div>
