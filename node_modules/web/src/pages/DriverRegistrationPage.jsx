@@ -56,7 +56,7 @@ const DriverRegistrationPage = () => {
               <ShieldCheck className="h-3.5 w-3.5" /> Licensed Driver Network
             </span>
             <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-              Register Your Car via WhatsApp
+              Driver &amp; Car Registration
             </h1>
             <p className="mt-4 text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
               No forms needed! Chat directly with our Admin Dispatch on WhatsApp to list your cross-border taxi, set your rates, and receive passenger bookings.
@@ -79,7 +79,7 @@ const DriverRegistrationPage = () => {
             </div>
 
             <h2 className="mt-6 font-display text-2xl font-bold text-white">
-              Instant Driver Registration
+              Instant Driver &amp; Car Registration
             </h2>
             <p className="mt-2 text-sm text-slate-400 max-w-md mx-auto">
               Click the button below to open a direct WhatsApp chat with Admin Dispatch (<strong className="text-emerald-400">+60 13-872 8630</strong>).
@@ -90,7 +90,7 @@ const DriverRegistrationPage = () => {
               className="mt-8 inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-2xl bg-emerald-500 px-8 py-4 text-base font-extrabold text-slate-950 shadow-2xl shadow-emerald-500/30 ring-4 ring-emerald-500/20 transition duration-300 hover:bg-emerald-400 active:scale-95"
             >
               <MessageCircle className="h-6 w-6 fill-slate-950" />
-              <span>Register Car on WhatsApp</span>
+              <span>Driver &amp; Car Registration on WhatsApp</span>
             </button>
 
             {/* Quick checklist of details */}

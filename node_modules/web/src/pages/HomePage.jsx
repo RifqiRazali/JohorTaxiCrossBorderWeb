@@ -101,7 +101,7 @@ const HomePage = () => {
             <button onClick={() => scrollToSection('destinations')} className="transition hover:text-emerald-400">Destinations</button>
             <button onClick={() => scrollToSection('why-us')} className="transition hover:text-emerald-400">Why Us</button>
             <button onClick={() => scrollToSection('faq')} className="transition hover:text-emerald-400">FAQ</button>
-            <button onClick={openDriverRegistrationWhatsApp} className="font-bold text-emerald-300 transition hover:text-emerald-200 bg-emerald-500/20 px-3.5 py-1 rounded-full ring-1 ring-emerald-400/40">Driver Register via WhatsApp</button>
+            <button onClick={openDriverRegistrationWhatsApp} className="font-bold text-emerald-300 transition hover:text-emerald-200 bg-emerald-500/20 px-3.5 py-1 rounded-full ring-1 ring-emerald-400/40">Driver &amp; Car Registration</button>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
@@ -109,7 +109,7 @@ const HomePage = () => {
               onClick={openDriverRegistrationWhatsApp}
               className="hidden sm:inline-block rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20"
             >
-              Register Car via WhatsApp
+              Driver &amp; Car Registration
             </button>
             <button
               onClick={() => scrollToSection('fleet')}
@@ -143,7 +143,7 @@ const HomePage = () => {
               <button onClick={() => { scrollToSection('why-us'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Why Choose Us</button>
               <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">FAQ</button>
               <button onClick={() => { openDriverRegistrationWhatsApp(); setMobileMenuOpen(false); }} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
-                <span>Driver Car Registration (WhatsApp)</span>
+                <span>Driver &amp; Car Registration (WhatsApp)</span>
                 <MessageCircle className="h-5 w-5 text-emerald-400" />
               </button>
             </motion.div>
