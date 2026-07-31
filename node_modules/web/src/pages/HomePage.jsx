@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles } from 'lucide-react';
+import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles, Menu, X } from 'lucide-react';
 import { FLEET, SERVICES, DESTINATIONS, DEFAULT_WHATSAPP_NUMBER as WHATSAPP_NUMBER } from '../data/fleetData';
 import logoImg from '../assets/logo.png';
 
@@ -49,6 +49,7 @@ const FAQS = [
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState('johor');
   const [openFaq, setOpenFaq] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -77,14 +78,14 @@ const HomePage = () => {
 
       {/* 1. Header Navigation */}
       <header className="absolute inset-x-0 top-0 z-30">
-        <div className="mx-auto flex max-w-[90rem] items-center justify-between px-5 py-5 sm:px-8">
-          <div className="flex items-center gap-4 text-white">
-            <div className="flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center rounded-2xl bg-slate-900 border-2 border-slate-700 p-1.5 shadow-2xl shadow-emerald-500/30 ring-2 ring-emerald-400">
-              <img src={logoImg} alt="Taxi Johor Cross Border Logo" className="h-full w-full object-contain rounded-xl" />
+        <div className="mx-auto flex max-w-[90rem] items-center justify-between px-4 py-4 sm:px-8">
+          <div className="flex items-center gap-3 sm:gap-4 text-white">
+            <div className="flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-slate-900 border-2 border-slate-700 p-1 shadow-2xl ring-2 ring-emerald-400">
+              <img src={logoImg} alt="Taxi Johor Cross Border Logo" className="h-full w-full object-contain rounded-lg sm:rounded-xl" />
             </div>
             <div>
-              <span className="font-display text-xl sm:text-2xl font-extrabold tracking-tight block leading-none text-white">Taxi Johor Cross Border</span>
-              <span className="text-xs sm:text-sm text-emerald-400 font-semibold tracking-wide mt-1 block">Singapore ↔ Johor Taxi Specialist</span>
+              <span className="font-display text-base sm:text-2xl font-extrabold tracking-tight block leading-tight text-white">Taxi Johor Cross Border</span>
+              <span className="text-[11px] sm:text-sm text-emerald-400 font-semibold tracking-wide block">Singapore ↔ Johor Taxi</span>
             </div>
           </div>
           
@@ -97,7 +98,7 @@ const HomePage = () => {
             <Link to="/register-driver" className="font-bold text-emerald-300 transition hover:text-emerald-200 bg-emerald-500/20 px-3 py-1 rounded-full ring-1 ring-emerald-400/40">Driver Join</Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/register-driver"
               className="hidden sm:inline-block rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20"
@@ -106,12 +107,42 @@ const HomePage = () => {
             </Link>
             <button
               onClick={() => scrollToSection('fleet')}
-              className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
+              className="rounded-full bg-emerald-500 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
             >
               Select SG-Johor Taxi
             </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900/90 border border-slate-700 text-white lg:hidden hover:bg-slate-800 focus:outline-none active:scale-95"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5 text-emerald-400" /> : <Menu className="h-5 w-5 text-white" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-x-0 top-full bg-slate-950/95 border-b border-slate-800 backdrop-blur-2xl px-6 py-6 shadow-2xl lg:hidden flex flex-col gap-4 z-40"
+            >
+              <button onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Services</button>
+              <button onClick={() => { scrollToSection('fleet'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Available Taxis &amp; Fares</button>
+              <button onClick={() => { scrollToSection('destinations'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Popular Destinations</button>
+              <button onClick={() => { scrollToSection('why-us'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Why Choose Us</button>
+              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">FAQ</button>
+              <Link to="/register-driver" onClick={() => setMobileMenuOpen(false)} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
+                <span>Driver &amp; Car Registration</span>
+                <ArrowRight className="h-5 w-5 text-emerald-400" />
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* 2. Hero Section */}
@@ -126,32 +157,32 @@ const HomePage = () => {
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 ring-1 ring-emerald-400/50">
               <MapPin className="h-3.5 w-3.5" /> Singapore ↔ All Johor Destinations
             </span>
-            <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 sm:mt-6 font-display text-3xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] sm:leading-[1.03] tracking-tight text-white">
               Singapore ↔ Johor{' '}
               <span className="relative inline-block text-emerald-400">
                 Door-To-Door
               </span>{' '}
               Cross-Border Taxi
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-slate-100 sm:text-xl">
+            <p className="mt-5 sm:mt-7 max-w-xl text-base sm:text-xl leading-relaxed text-slate-100">
               Comfortable direct taxi transfers between Singapore and all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing &amp; more). <strong className="text-white">Stay inside the taxi at Woodlands &amp; Tuas customs</strong> — no lugging bags through immigration counters.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-7 sm:mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 onClick={() => scrollToSection('fleet')}
-                className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-emerald-500 px-8 text-base font-bold text-slate-950 shadow-xl shadow-emerald-500/25 transition hover:bg-emerald-400 active:scale-[0.98]"
+                className="group inline-flex min-h-[50px] sm:min-h-[52px] items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 sm:px-8 text-sm sm:text-base font-bold text-slate-950 shadow-xl shadow-emerald-500/25 transition hover:bg-emerald-400 active:scale-[0.98]"
               >
                 View SG-Johor Taxis &amp; Drivers
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
-              <span className="text-sm font-medium text-slate-200">Woodlands &amp; Tuas Clearance Included</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-200 text-center sm:text-left">Woodlands &amp; Tuas Clearance Included</span>
             </div>
 
-            <dl className="mt-14 grid max-w-xl grid-cols-3 gap-6 border-t border-white/15 pt-7">
+            <dl className="mt-10 sm:mt-14 grid max-w-xl grid-cols-3 gap-2 sm:gap-6 border-t border-white/15 pt-5 sm:pt-7">
               {[['Stay in Taxi', 'At SG-MY Customs'], ['Fixed Fares', 'Tolls Included'], ['All Johor', 'Destinations Covered']].map(([v, l]) => (
-                <div key={l}>
-                  <dt className="font-display text-xl font-bold text-white sm:text-2xl">{v}</dt>
-                  <dd className="mt-1 text-sm text-slate-300">{l}</dd>
+                <div key={l} className="text-center sm:text-left">
+                  <dt className="font-display text-sm sm:text-2xl font-bold text-white leading-snug">{v}</dt>
+                  <dd className="mt-1 text-[11px] sm:text-sm text-slate-300 leading-tight">{l}</dd>
                 </div>
               ))}
             </dl>
@@ -272,16 +303,16 @@ const HomePage = () => {
             </div>
             
             {/* Tab Selector */}
-            <div className="flex items-center gap-2 rounded-2xl bg-slate-100 p-1.5 ring-1 ring-slate-200/80">
+            <div className="grid grid-cols-2 w-full md:w-auto items-center gap-1 sm:gap-2 rounded-2xl bg-slate-100 p-1.5 ring-1 ring-slate-200/80">
               <button
                 onClick={() => setActiveTab('johor')}
-                className={`rounded-xl px-5 py-2.5 text-sm font-bold transition ${activeTab === 'johor' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
+                className={`rounded-xl px-3 sm:px-5 py-2.5 text-xs sm:text-sm font-bold transition text-center ${activeTab === 'johor' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
               >
                 Johor Attractions
               </button>
               <button
                 onClick={() => setActiveTab('singapore')}
-                className={`rounded-xl px-5 py-2.5 text-sm font-bold transition ${activeTab === 'singapore' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
+                className={`rounded-xl px-3 sm:px-5 py-2.5 text-xs sm:text-sm font-bold transition text-center ${activeTab === 'singapore' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
               >
                 Singapore Attractions
               </button>
@@ -497,10 +528,10 @@ const HomePage = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-emerald-500 px-5 py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-white/30 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
+        className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-3 rounded-full bg-emerald-500 px-4 sm:px-5 py-3 sm:py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-slate-950/20 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
       >
-        <MessageCircle className="h-6 w-6 shrink-0 fill-slate-950" />
-        <span className="hidden sm:inline-block text-sm font-extrabold">Instant WhatsApp Chat</span>
+        <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-slate-950" />
+        <span className="text-xs sm:text-sm font-extrabold">WhatsApp Booking</span>
       </a>
     </div>
   );
