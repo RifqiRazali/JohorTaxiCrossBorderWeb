@@ -19,7 +19,7 @@ export const FLEET = [
     id: 'vellfire taxi',
     name: 'Vellfire Taxi',
     driverName: 'Uncle Tan',
-    rate: 'SGD150 per trip',
+    rate: 'SGD 150 per trip',
     seats: '6 passengers',
     luggage: '2 large bags',
     plateNumber: 'WAA 1234 A',
