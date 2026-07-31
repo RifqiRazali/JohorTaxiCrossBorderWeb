@@ -24,7 +24,7 @@ export const FLEET = [
     luggage: '2 large bags',
     plateNumber: 'WAA 1234 A',
     whatsappNumber: '60138728630',
-    image: 'https://images.hostinger.com/2e1008f3-98e6-4143-9367-c733b16daaa8.png',
+    image: '/images/fleet/vellfiretaxi.jpeg',
   },
   {
     id: 'toyota innova razali',
@@ -35,7 +35,7 @@ export const FLEET = [
     luggage: '4 large bags',
     plateNumber: 'WBB 5678 B',
     whatsappNumber: '60138728630',
-    image: 'https://images.hostinger.com/48a686e7-49e1-4cc6-b747-165c4b6797dc.png',
+    image: '/images/fleet/toyotainnovapa.jpeg',
   },
   {
     id: 'toyota innova razali',
@@ -46,7 +46,7 @@ export const FLEET = [
     luggage: '4 large bags',
     plateNumber: 'WBB 5678 B',
     whatsappNumber: '60138728630',
-    image: 'https://images.hostinger.com/48a686e7-49e1-4cc6-b747-165c4b6797dc.png',
+    image: '/images/fleet/toyotainnovakawan.jpeg',
   },
 ];
 
