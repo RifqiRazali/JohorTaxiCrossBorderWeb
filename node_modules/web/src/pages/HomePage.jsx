@@ -510,7 +510,7 @@ const HomePage = () => {
       </section>
 
       {/* 9. Footer */}
-      <footer className="bg-slate-950 py-14 text-slate-400">
+      <footer className="bg-slate-950 py-14 text-slate-400 border-t border-slate-900">
         <div className="mx-auto flex max-w-[72rem] flex-col gap-8 px-5 sm:px-8 md:flex-row md:items-end md:justify-between">
           <div className="flex items-center gap-5">
             <div className="flex h-20 w-20 sm:h-24 sm:w-24 shrink-0 items-center justify-center rounded-2xl bg-slate-900 border-2 border-slate-700 p-2 shadow-2xl shadow-emerald-500/30 ring-2 ring-emerald-400">
@@ -519,6 +519,9 @@ const HomePage = () => {
             <div>
               <p className="font-display text-2xl font-extrabold text-white leading-none">Taxi Johor Cross Border</p>
               <p className="mt-2 max-w-sm text-sm leading-relaxed">Singapore ↔ Johor cross-border taxi service. Connect directly with taxi drivers 24 hours a day.</p>
+              <p className="mt-3 text-[11px] text-slate-500 max-w-md leading-relaxed">
+                *Disclaimer: Taxi Johor Cross Border operates as an online booking directory and dispatch service connecting passengers directly with licensed Singapore (LTA) &amp; Malaysia (APAD) cross-border transport operators.
+              </p>
             </div>
           </div>
           <div className="text-sm">
