@@ -1969,3 +1969,12 @@
 ## 2026-08-01 22:27:13.114Z click
 - element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
 
+## 2026-08-01 22:28:07.392Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 220 per tripVellfire TaxiDriver: Uncle Tan6 passengers2 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. ?5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. ?5 passengers4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-01 22:31:44.434Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Book via WhatsApp"}
+
+## 2026-08-01 22:32:02.631Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Book via WhatsApp"}
+

@@ -26,11 +26,7 @@ const openDestinationWhatsApp = (dest) => {
   window.open(url, '_blank', 'noopener,noreferrer');
 };
 
-const openDriverRegistrationWhatsApp = () => {
-  const text = `Hello! I am a licensed cross-border taxi driver and I would like to register my vehicle to join the Taxi Johor Cross Border network.\n\nPlease guide me on how to list my car on your website.`;
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
-};
+
 
 const FAQS = [
   {
@@ -104,12 +100,6 @@ const HomePage = () => {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
-              onClick={openDriverRegistrationWhatsApp}
-              className="hidden sm:inline-block rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20 border border-white/10"
-            >
-              Driver &amp; Car Registration
-            </button>
-            <button
               onClick={() => scrollToSection('fleet')}
               className="rounded-full bg-emerald-500 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
             >
@@ -139,11 +129,7 @@ const HomePage = () => {
               <button onClick={() => { scrollToSection('fleet'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Available Taxis &amp; Fares</button>
               <button onClick={() => { scrollToSection('destinations'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Popular Destinations</button>
               <button onClick={() => { scrollToSection('why-us'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Why Choose Us</button>
-              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">FAQ</button>
-              <button onClick={() => { openDriverRegistrationWhatsApp(); setMobileMenuOpen(false); }} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
-                <span>Driver &amp; Car Registration (WhatsApp)</span>
-                <MessageCircle className="h-5 w-5 text-emerald-400" />
-              </button>
+              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition">FAQ</button>
             </motion.div>
           )}
         </AnimatePresence>
