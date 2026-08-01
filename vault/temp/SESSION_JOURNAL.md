@@ -1903,3 +1903,69 @@
 - url: http://localhost:3000/
 - title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
 
+## 2026-07-31 21:49:55.949Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-01 16:36:46.965Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-01 16:36:47.094Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-01 16:38:56.589Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-01 22:26:19.746Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-01 22:26:19.817Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-01 22:26:51.617Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 220 per tripVellfire TaxiDriver: Uncle Tan6 passengers2 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. ?5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Kawan5 passengers4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-01 22:27:02.389Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 220 per tripVellfire TaxiDriver: Uncle Tan6 passengers2 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. ?5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee5 passengers4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. ?5 passengers4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-01 22:27:06.992Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-08-01 22:27:07.397Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor Attractions"}
+
+## 2026-08-01 22:27:09.573Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:10.232Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:10.507Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:10.977Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:11.301Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:11.667Z click
+- element: {"tag":"h3","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Toyota Innova"}
+
+## 2026-08-01 22:27:12.024Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:12.379Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:12.813Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-01 22:27:13.114Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
