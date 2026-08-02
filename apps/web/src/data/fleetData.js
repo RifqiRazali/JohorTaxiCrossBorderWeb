@@ -105,6 +105,16 @@ export const FLEET = [
     whatsappNumber: '601137433099',
     image: '/images/fleet/toyotainnovapa.jpeg',
   },
+   {
+    id: 'tinnova-samtino',
+    name: 'Toyota Innova',
+    driverName: 'Mr. Samtino',
+    rate: 'SGD 120 per trip',
+    seats: '4 Seater',
+    luggage: '4 large bags',
+    whatsappNumber: '601116177393',
+    image: '/images/fleet/toyotainnovasamtino.jpeg',
+  },
 ];
 
 
