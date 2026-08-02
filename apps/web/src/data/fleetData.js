@@ -43,7 +43,7 @@ export const FLEET = [
     seats: '4 Seater',
     luggage: '4 large bags',
     whatsappNumber: '60106656136',
-    image: '/images/fleet/toyotainnovaelmee.jpeg',
+    image: '/images/fleet/toyotainnovaelmees.jpeg',
   },
   {
     id: 'tinnova-kawan2',
