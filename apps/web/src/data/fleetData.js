@@ -58,7 +58,7 @@ export const FLEET = [
   {
     id: 'tinnova-kawan2',
     name: 'Toyota Innova',
-    driverName: 'Mr. ?',
+    driverName: 'Mr.Khamisan',
     rate: 'SGD 120 per trip',
     seats: '4 passengers',
     luggage: '4 large bags',
