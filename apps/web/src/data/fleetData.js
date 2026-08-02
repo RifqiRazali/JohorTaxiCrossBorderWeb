@@ -23,7 +23,7 @@ export const FLEET = [
     seats: '6 passengers',
     luggage: '6 large bags',
     whatsappNumber: '60177614385',
-    image: '/images/fleet/vellfiretaxi.jpeg',
+    image: '/images/fleet/vellfiretaximan.jpeg',
   },
   {
     id: 'tinnova-razali',
