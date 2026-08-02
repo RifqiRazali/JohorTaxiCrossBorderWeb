@@ -2204,3 +2204,22 @@
 - url: http://localhost:3000/
 - title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
 
+## 2026-08-02 20:22:36.342Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 20:22:36.411Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 20:22:36.597Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-02 20:22:36.598Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-02 20:25:53.133Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Book via WhatsApp"}
+

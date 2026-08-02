@@ -32,7 +32,7 @@ export const FLEET = [
     rate: 'SGD 120 per trip',
     seats: '4 Seater',
     luggage: '2 large bags',
-    whatsappNumber: '601137433099',
+    whatsappNumber: '60189094047',
     image: '/images/fleet/protonpersona1.jpeg',
   },
   {
