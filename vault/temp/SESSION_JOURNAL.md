@@ -1978,3 +1978,27 @@
 ## 2026-08-01 22:32:02.631Z click
 - element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Book via WhatsApp"}
 
+## 2026-08-02 17:16:10.345Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 17:16:20.101Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-02 17:16:24.348Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 17:16:24.470Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-02 17:16:38.322Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 17:18:12.354Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
