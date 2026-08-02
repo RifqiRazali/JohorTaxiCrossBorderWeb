@@ -2026,3 +2026,44 @@
 - url: http://localhost:3000/
 - title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
 
+## 2026-08-02 17:54:05.066Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-08-02 17:54:06.248Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor Attractions"}
+
+## 2026-08-02 17:54:12.624Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Singapore Attractions"}
+
+## 2026-08-02 17:54:19.077Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor Attractions"}
+
+## 2026-08-02 19:30:05.902Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 19:30:15.515Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-02 19:32:09.619Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:32:09.894Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:32:12.004Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:32:12.203Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance."}
+
+## 2026-08-02 19:32:12.774Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance."}
+
+## 2026-08-02 19:34:29.391Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 19:34:40.804Z click
+- element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+

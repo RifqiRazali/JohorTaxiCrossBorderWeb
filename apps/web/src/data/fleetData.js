@@ -6,7 +6,7 @@
  */
 
 // Fallback WhatsApp number for general inquiries & dispatch
-export const DEFAULT_WHATSAPP_NUMBER = '60138728630';
+export const DEFAULT_WHATSAPP_NUMBER = '60127942974';
 
 
 /* ==========================================================================
@@ -79,7 +79,7 @@ export const FLEET = [
     id: 'tnoah-saiful',
     name: 'Toyota Noah (Singapore to Johor)',
     driverName: 'Mr.Saiful',
-    rate: 'SGD 120 per trip',
+    rate: 'SGD 140 per trip',
     seats: '6 Seater',
     luggage: '4 large bags',
     whatsappNumber: '6588599366',
