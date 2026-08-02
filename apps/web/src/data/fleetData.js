@@ -23,7 +23,7 @@ export const FLEET = [
     seats: '4 Seater',
     luggage: '4 large bags',
     whatsappNumber: '60127942974',
-    image: '/images/fleet/toyotainnovakawan.jpeg',
+    image: '/images/fleet/toyotainnovayy.jpeg',
   },
   {
     id: 'tinnova-razali',
@@ -53,7 +53,7 @@ export const FLEET = [
     seats: '4 Seater',
     luggage: '4 large bags',
     whatsappNumber: '60127531753',
-    image: '/images/fleet/toyotainnovakawan2.jpeg',
+    image: '/images/fleet/toyotainnovakhamisan.jpeg',
   },
    {
     id: 'tinnova-malik',

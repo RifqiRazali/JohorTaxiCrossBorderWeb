@@ -2002,3 +2002,27 @@
 - url: http://localhost:3000/
 - title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
 
+## 2026-08-02 17:31:23.054Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 17:40:06.556Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"How do I confirm my booking and pay?"}
+
+## 2026-08-02 17:40:07.071Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Can I request custom pick-up addresses anywhere in Singapore or Johor?"}
+
+## 2026-08-02 17:40:07.632Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Are Singapore/Malaysia highway tolls, VEP, and checkpoint fees included in the price?"}
+
+## 2026-08-02 17:40:08.116Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Do passengers need to alight (get out) of the taxi at Singapore & Malaysia customs?"}
+
+## 2026-08-02 17:47:16.275Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 17:48:00.934Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
