@@ -25,15 +25,15 @@ export const FLEET = [
     whatsappNumber: '60127942974',
     image: '/images/fleet/toyotainnovayy.jpeg',
   },
-  {
-    id: 'tinnova-razali',
-    name: 'Toyota Innova',
-    driverName: 'Mr. Razali',
+    {
+    id: 'ppersona',
+    name: 'Proton Persona',
+    driverName: 'Mr. Azwan',
     rate: 'SGD 120 per trip',
     seats: '4 Seater',
-    luggage: '4 large bags',
+    luggage: '2 large bags',
     whatsappNumber: '601137433099',
-    image: '/images/fleet/toyotainnovapa.jpeg',
+    image: '/images/fleet/protonpersona.jpeg',
   },
   {
     id: 'tinnova-elmee',
@@ -94,6 +94,16 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60177614385',
     image: '/images/fleet/vellfiretaximan.jpeg',
+  },
+  {
+    id: 'tinnova-razali',
+    name: 'Toyota Innova',
+    driverName: 'Mr. Razali',
+    rate: 'SGD 120 per trip',
+    seats: '4 Seater',
+    luggage: '4 large bags',
+    whatsappNumber: '601137433099',
+    image: '/images/fleet/toyotainnovapa.jpeg',
   },
 ];
 

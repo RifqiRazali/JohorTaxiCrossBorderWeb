@@ -2067,3 +2067,104 @@
 ## 2026-08-02 19:34:40.804Z click
 - element: {"tag":"img","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
 
+## 2026-08-02 19:56:00.372Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 140 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:56:00.652Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 140 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:56:03.019Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 140 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:56:03.252Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance."}
+
+## 2026-08-02 19:56:04.468Z click
+- element: {"tag":"section","role":null,"ariaLabel":null,"name":null,"type":null,"id":"fleet","placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 140 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:56:04.825Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore Fleet"}
+
+## 2026-08-02 19:56:07.025Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Johor ⟶ Singapore FleetPick your Johor-SG taxi & chat on WhatsAppEvery rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance."}
+
+## 2026-08-02 19:56:07.331Z click
+- element: {"tag":"p","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance."}
+
+## 2026-08-02 19:56:10.618Z click
+- element: {"tag":"h2","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Pick your Johor-SG taxi & chat on WhatsApp"}
+
+## 2026-08-02 19:56:18.284Z click
+- element: {"tag":"h3","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Toyota Innova"}
+
+## 2026-08-02 19:56:18.986Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"SGD 120 per tripToyota InnovaDriver: Mr. YY4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Razali4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr. Elmee4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Khamisan4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.Malik4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripToyota InnovaDriver: Mr.YB4 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 140 per tripToyota Noah (Singapore to Johor)Driver: Mr.Saiful6 Seater4 large bagsLicensed TaxiBook via WhatsAppSGD 120 per tripProton ExoraDriver: Mr. Man4 Seater4 large bagsLicensed TaxiBook via WhatsApp"}
+
+## 2026-08-02 19:56:44.787Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 20:01:45.201Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-02 20:03:44.038Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s tinnova-razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785701023333:51:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:10816:3)
+        at App
+
+## 2026-08-02 20:03:44.041Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s tinnova-razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785701023333:51:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:10816:3)
+        at App
+
+## 2026-08-02 20:03:55.014Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s tinnova-razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785701034164:51:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:10816:3)
+        at App
+
+## 2026-08-02 20:03:55.013Z console.error
+- text: 
+    Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s tinnova-razali 
+        at div
+        at div
+        at section
+        at div
+        at HomePage (http://localhost:3000/src/pages/HomePage.jsx?t=1785701034164:51:37)
+        at RenderedRoute (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:6647:26)
+        at Routes (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7572:3)
+        at Router (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:7511:13)
+        at BrowserRouter (http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=8342dd3d:10816:3)
+        at App
+
+## 2026-08-02 20:06:30.783Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
