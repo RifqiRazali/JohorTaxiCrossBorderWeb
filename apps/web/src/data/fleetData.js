@@ -16,14 +16,14 @@ export const DEFAULT_WHATSAPP_NUMBER = '60138728630';
    ========================================================================== */
 export const FLEET = [
   {
-    id: 'vellfire taxi',
-    name: 'Vellfire Taxi',
-    driverName: 'Mr. Man',
-    rate: 'SGD 220 per trip',
-    seats: '6 passengers',
-    luggage: '6 large bags',
-    whatsappNumber: '60177614385',
-    image: '/images/fleet/vellfiretaximan.jpeg',
+    id: 'tinnova-kawan',
+    name: 'Toyota Innova',
+    driverName: 'Mr. YY',
+    rate: 'SGD 120 per trip',
+    seats: '4 passengers',
+    luggage: '4 large bags',
+    whatsappNumber: '60127942974',
+    image: '/images/fleet/toyotainnovakawan.jpeg',
   },
   {
     id: 'tinnova-razali',
@@ -34,16 +34,6 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '601137433099',
     image: '/images/fleet/toyotainnovapa.jpeg',
-  },
-  {
-    id: 'tinnova-kawan',
-    name: 'Toyota Innova',
-    driverName: 'Mr. ?',
-    rate: 'SGD 120 per trip',
-    seats: '4 passengers',
-    luggage: '4 large bags',
-    whatsappNumber: '60127942974',
-    image: '/images/fleet/toyotainnovakawan.jpeg',
   },
   {
     id: 'tinnova-elmee',
@@ -64,6 +54,16 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60127531753',
     image: '/images/fleet/toyotainnovakawan2.jpeg',
+  },
+  {
+    id: 'proton exora',
+    name: 'Proton Exora',
+    driverName: 'Mr. Man',
+    rate: 'SGD 120 per trip',
+    seats: '4 passengers',
+    luggage: '4 large bags',
+    whatsappNumber: '60177614385',
+    image: '/images/fleet/vellfiretaximan.jpeg',
   },
 ];
 
