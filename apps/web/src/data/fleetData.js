@@ -33,7 +33,7 @@ export const FLEET = [
     seats: '4 Seater',
     luggage: '2 large bags',
     whatsappNumber: '60189094047',
-    image: '/images/fleet/protonpersona1.jpeg',
+    image: '/images/fleet/protonpersona2.jpeg',
   },
   {
     id: 'tinnova-elmee',
