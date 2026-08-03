@@ -547,7 +547,7 @@ const HomePage = () => {
           </div>
           <div className="text-sm">
             <p className="font-semibold text-white">Johor ⟶ Singapore Taxi Dispatch</p>
-            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+60 13-872 8630</a>
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+60 12-794 2974</a>
             <p className="mt-4 text-xs text-slate-500">© {new Date().getFullYear()} Taxi Johor Cross Border. All rights reserved.</p>
           </div>
         </div>
