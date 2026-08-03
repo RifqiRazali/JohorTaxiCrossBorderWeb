@@ -4,8 +4,9 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { ShieldCheck, LogIn, ArrowLeft, Lock, Mail, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { loginSchema } from '../lib/zodSchemas';
+import { getValidationMessage, loginSchema } from '../lib/zodSchemas';
 import { isSupabaseConfigured } from '../lib/supabaseClient';
+import { getDashboardPathForRole, AUTH_ROLES } from '../lib/authRoles';
 import logoImg from '../assets/logo.png';
 
 const LoginPage = () => {
@@ -21,8 +22,7 @@ const LoginPage = () => {
   // If already logged in, redirect to respective dashboard
   React.useEffect(() => {
     if (user && role) {
-      if (role === 'admin') navigate('/admin', { replace: true });
-      else if (role === 'driver') navigate('/driver', { replace: true });
+      navigate(getDashboardPathForRole(role), { replace: true });
     }
   }, [user, role, navigate]);
 
@@ -33,17 +33,29 @@ const LoginPage = () => {
     // Zod Validation
     const validation = loginSchema.safeParse({ email, password });
     if (!validation.success) {
-      setErrorMsg(validation.error.errors[0].message);
+      setErrorMsg(getValidationMessage(validation));
       return;
     }
 
     setIsSubmitting(true);
     try {
-      await login(email, password);
+      const data = await login(email, password);
+      const userRole = data?.profile?.role || role;
+      const targetDashboard = getDashboardPathForRole(userRole);
+
       const from = location.state?.from?.pathname;
-      if (from) {
-        navigate(from, { replace: true });
+      if (from && from !== '/login' && from !== '/') {
+        if (userRole === AUTH_ROLES.ADMIN && from === '/admin') {
+          navigate('/admin', { replace: true });
+          return;
+        }
+        if (userRole === AUTH_ROLES.DRIVER && from === '/driver') {
+          navigate('/driver', { replace: true });
+          return;
+        }
       }
+
+      navigate(targetDashboard, { replace: true });
     } catch (err) {
       console.error('Login error:', err);
       let msg = 'Invalid login credentials. Please try again.';

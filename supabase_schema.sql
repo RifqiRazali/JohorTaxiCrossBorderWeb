@@ -7,6 +7,7 @@
 
 -- 1. ENUMS & EXTENSIONS
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 DO $$ BEGIN
   CREATE TYPE app_role AS ENUM ('admin', 'driver');
@@ -33,6 +34,7 @@ RETURNS app_role
 LANGUAGE sql
 SECURITY DEFINER
 STABLE
+SET search_path = public
 AS $$
   SELECT role FROM public.profiles WHERE id = user_id;
 $$;
@@ -170,10 +172,10 @@ BEGIN
   )
   ON CONFLICT (id) DO UPDATE SET
     full_name = EXCLUDED.full_name,
-    role = EXCLUDED.role;
+    role = COALESCE((new.raw_user_meta_data->>'role')::public.app_role, public.profiles.role, EXCLUDED.role);
   RETURN new;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
@@ -183,31 +185,55 @@ CREATE TRIGGER on_auth_user_created
 
 -- 9. ADMIN DRIVER PROVISIONING RPC FUNCTIONS
 
--- Allows Admin to create an auto-confirmed driver user account directly
+DROP FUNCTION IF EXISTS public.admin_create_driver_user(TEXT, TEXT, TEXT, TEXT);
+DROP FUNCTION IF EXISTS public.admin_create_driver_user(TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT);
+
+-- Allows Admin to create an auto-confirmed driver user account and its first fleet record
 CREATE OR REPLACE FUNCTION public.admin_create_driver_user(
   driver_email TEXT,
   driver_password TEXT,
   driver_full_name TEXT,
-  target_fleet_id TEXT
+  driver_phone TEXT,
+  car_name TEXT,
+  car_seats TEXT,
+  car_luggage TEXT,
+  car_rate TEXT,
+  car_image_url TEXT,
+  car_description TEXT DEFAULT NULL
 )
-RETURNS UUID AS $$
+RETURNS JSONB AS $$
 DECLARE
   new_user_id UUID := gen_random_uuid();
+  slug_base TEXT;
+  new_fleet_id TEXT;
 BEGIN
   IF public.get_user_role(auth.uid()) != 'admin' THEN
     RAISE EXCEPTION 'Access denied. Only Admins can provision driver accounts.';
   END IF;
 
+  IF EXISTS (SELECT 1 FROM auth.users WHERE LOWER(email) = LOWER(driver_email)) THEN
+    RAISE EXCEPTION 'A driver account already exists for %. Use a different email.', LOWER(driver_email);
+  END IF;
+
+  slug_base := trim(both '-' from regexp_replace(lower(driver_full_name), '[^a-z0-9]+', '-', 'g'));
+  IF slug_base = '' THEN
+    slug_base := 'driver';
+  END IF;
+  new_fleet_id := 'fleet-' || slug_base || '-' || substr(replace(new_user_id::text, '-', ''), 1, 8);
+
   -- 1. Insert into auth.users (email pre-confirmed)
   INSERT INTO auth.users (
     id, instance_id, aud, role, email, encrypted_password, email_confirmed_at,
+    confirmation_token, recovery_token, email_change_token_new,
+    email_change_token_current, email_change, phone_change, phone_change_token,
     raw_app_meta_data, raw_user_meta_data, created_at, updated_at
   )
   VALUES (
     new_user_id, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
     LOWER(driver_email), crypt(driver_password, gen_salt('bf', 10)), now(),
+    '', '', '', '', '', '', '',
     '{"provider":"email","providers":["email"]}',
-    json_build_object('full_name', driver_full_name, 'role', 'driver')::jsonb,
+    json_build_object('full_name', driver_full_name, 'phone_number', driver_phone, 'role', 'driver')::jsonb,
     now(), now()
   );
 
@@ -228,14 +254,20 @@ BEGIN
   VALUES (new_user_id, driver_full_name, 'driver')
   ON CONFLICT (id) DO UPDATE SET role = 'driver', full_name = driver_full_name;
 
-  -- 4. Link vehicle
-  UPDATE public.fleets
-  SET driver_id = new_user_id
-  WHERE id = target_fleet_id;
+  -- 4. Create and link the driver's first vehicle
+  INSERT INTO public.fleets (
+    id, driver_id, name, driver_name, rate, seats, luggage,
+    whatsapp_number, image_url, description, is_published, display_order
+  )
+  VALUES (
+    new_fleet_id, new_user_id, car_name, driver_full_name, car_rate, car_seats, car_luggage,
+    driver_phone, car_image_url, car_description, true,
+    COALESCE((SELECT MAX(display_order) + 1 FROM public.fleets), 1)
+  );
 
-  RETURN new_user_id;
+  RETURN jsonb_build_object('driver_id', new_user_id, 'fleet_id', new_fleet_id);
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, extensions;
 
 -- Allows an Admin user to assign or update a driver's vehicle profile cleanly
 CREATE OR REPLACE FUNCTION public.admin_link_driver_fleet(target_driver_id UUID, target_fleet_id TEXT)
@@ -253,7 +285,7 @@ BEGIN
   SET driver_id = target_driver_id
   WHERE id = target_fleet_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 
 
@@ -359,6 +391,16 @@ DECLARE
   admin_uid  UUID;
   driver_uid UUID;
 BEGIN
+  UPDATE auth.users
+  SET confirmation_token = COALESCE(confirmation_token, ''),
+      recovery_token = COALESCE(recovery_token, ''),
+      email_change_token_new = COALESCE(email_change_token_new, ''),
+      email_change_token_current = COALESCE(email_change_token_current, ''),
+      email_change = COALESCE(email_change, ''),
+      phone_change = COALESCE(phone_change, ''),
+      phone_change_token = COALESCE(phone_change_token, '')
+  WHERE LOWER(email) IN ('admin@taxijohor.com', 'driver@taxijohor.com');
+
   -- 1. Get or Create Admin User in auth.users
   SELECT id INTO admin_uid FROM auth.users WHERE LOWER(email) = 'admin@taxijohor.com' LIMIT 1;
 
@@ -366,17 +408,27 @@ BEGIN
     admin_uid := gen_random_uuid();
     INSERT INTO auth.users (
       id, instance_id, aud, role, email, encrypted_password, email_confirmed_at,
+      confirmation_token, recovery_token, email_change_token_new,
+      email_change_token_current, email_change, phone_change, phone_change_token,
       raw_app_meta_data, raw_user_meta_data, created_at, updated_at
     )
     VALUES (
       admin_uid, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
       'admin@taxijohor.com', crypt('Password123!', gen_salt('bf', 10)), now(),
+      '', '', '', '', '', '', '',
       '{"provider":"email","providers":["email"]}', '{"full_name":"System Administrator","role":"admin"}', now(), now()
     );
   ELSE
     UPDATE auth.users
     SET encrypted_password = crypt('Password123!', gen_salt('bf', 10)),
         email_confirmed_at = now(),
+        confirmation_token = COALESCE(confirmation_token, ''),
+        recovery_token = COALESCE(recovery_token, ''),
+        email_change_token_new = COALESCE(email_change_token_new, ''),
+        email_change_token_current = COALESCE(email_change_token_current, ''),
+        email_change = COALESCE(email_change, ''),
+        phone_change = COALESCE(phone_change, ''),
+        phone_change_token = COALESCE(phone_change_token, ''),
         raw_user_meta_data = json_build_object('full_name', 'System Administrator', 'role', 'admin')::jsonb,
         updated_at = now()
     WHERE id = admin_uid;
@@ -402,7 +454,10 @@ BEGIN
 
   -- 2. Clean & Recreate Driver User in auth.users & auth.identities
   -- Delete any corrupted/orphan identity records causing HTTP 500 in GoTrue
-  DELETE FROM auth.identities WHERE identity_data->>'email' = 'driver@taxijohor.com' OR user_id IN (SELECT id FROM auth.users WHERE LOWER(email) = 'driver@taxijohor.com');
+  DELETE FROM auth.identities
+  WHERE provider_id = 'driver@taxijohor.com'
+     OR identity_data->>'email' = 'driver@taxijohor.com'
+     OR user_id IN (SELECT id FROM auth.users WHERE LOWER(email) = 'driver@taxijohor.com');
   DELETE FROM public.profiles WHERE id IN (SELECT id FROM auth.users WHERE LOWER(email) = 'driver@taxijohor.com');
   DELETE FROM auth.users WHERE LOWER(email) = 'driver@taxijohor.com';
 
@@ -410,11 +465,14 @@ BEGIN
 
   INSERT INTO auth.users (
     id, instance_id, aud, role, email, encrypted_password, email_confirmed_at,
+    confirmation_token, recovery_token, email_change_token_new,
+    email_change_token_current, email_change, phone_change, phone_change_token,
     raw_app_meta_data, raw_user_meta_data, created_at, updated_at
   )
   VALUES (
     driver_uid, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
     'driver@taxijohor.com', crypt('Password123!', gen_salt('bf', 10)), now(),
+    '', '', '', '', '', '', '',
     '{"provider":"email","providers":["email"]}', '{"full_name":"Mr. Razali","role":"driver"}', now(), now()
   );
 
@@ -422,21 +480,17 @@ BEGIN
     id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at
   )
   VALUES (
-    gen_random_uuid(), driver_uid, 'driver@taxijohor.com',
+    gen_random_uuid(), driver_uid, driver_uid::text,
     json_build_object('sub', driver_uid, 'email', 'driver@taxijohor.com')::jsonb,
     'email', now(), now(), now()
   );
 
   INSERT INTO public.profiles (id, full_name, role)
-  VALUES (driver_uid, 'Mr. Razali', 'driver');
+  VALUES (driver_uid, 'Mr. Razali', 'driver')
+  ON CONFLICT (id) DO UPDATE SET role = 'driver', full_name = 'Mr. Razali';
 
   UPDATE public.fleets
   SET driver_id = driver_uid
   WHERE id = 'tinnova-razali';
 
 END $$;
-
-
-
-
-

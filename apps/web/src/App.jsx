@@ -22,7 +22,7 @@ function App() {
           <Route
             path="/driver"
             element={
-              <ProtectedRoute allowedRoles={['driver', 'admin']}>
+              <ProtectedRoute allowedRoles={['driver']}>
                 <DriverDashboard />
               </ProtectedRoute>
             }

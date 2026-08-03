@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { authService } from '../services/authService';
+import { isValidAuthRole } from '../lib/authRoles';
 
 const AuthContext = createContext({
   user: null,
@@ -18,13 +19,26 @@ export const AuthProvider = ({ children }) => {
 
   const resolveProfile = async (userObj) => {
     if (!userObj) return null;
-    let userProf = await authService.getUserProfile(userObj.id);
-    if (!userProf || !userProf.role) {
-      const metaRole = userObj.user_metadata?.role || (userObj.email?.toLowerCase().includes('admin') ? 'admin' : 'driver');
-      const metaName = userObj.user_metadata?.full_name || userObj.email;
-      userProf = { id: userObj.id, full_name: metaName, role: metaRole };
+    const userProf = await authService.getUserProfile(userObj.id);
+
+    if (userProf && isValidAuthRole(userProf.role)) {
+      return userProf;
     }
-    return userProf;
+
+    const metaRole = userObj.user_metadata?.role;
+    if (isValidAuthRole(metaRole)) {
+      return {
+        id: userObj.id,
+        full_name: userObj.user_metadata?.full_name || userProf?.full_name || userObj.email || 'Portal user',
+        role: metaRole,
+      };
+    }
+
+    return {
+      id: userObj.id,
+      full_name: userProf?.full_name || userObj.email || 'Portal user',
+      role: null,
+    };
   };
 
   useEffect(() => {
@@ -75,6 +89,7 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
       const prof = await resolveProfile(data.user);
       setProfile(prof);
+      return { ...data, profile: prof };
     }
     return data;
   };
