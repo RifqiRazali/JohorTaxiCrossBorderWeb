@@ -2249,3 +2249,19 @@
 - url: http://localhost:3000/
 - title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
 
+## 2026-08-03 16:09:46.699Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-03 16:09:46.812Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-03 16:10:22.497Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+
+## 2026-08-03 16:11:37.167Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service
+

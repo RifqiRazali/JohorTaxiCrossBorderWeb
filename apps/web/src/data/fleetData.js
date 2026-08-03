@@ -93,7 +93,7 @@ export const FLEET = [
     seats: '4 Seater',
     luggage: '4 large bags',
     whatsappNumber: '60177614385',
-    image: '/images/fleet/vellfiretaximan.jpeg',
+    image: '/images/fleet/vellfiretaximan2.jpeg',
   },
   {
     id: 'tinnova-razali',
@@ -114,6 +114,16 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '601116177393',
     image: '/images/fleet/toyotainnovasamtino.jpeg',
+  },
+  {
+    id: 'psagavvt',
+    name: 'Proton Saga VVT',
+    driverName: 'Mr. Alfah',
+    rate: 'SGD 100 per trip',
+    seats: '4 Seater',
+    luggage: '4 large bags',
+    whatsappNumber: '60127486709',
+    image: '/images/fleet/protonsagavvt.jpeg',
   },
 ];
 
