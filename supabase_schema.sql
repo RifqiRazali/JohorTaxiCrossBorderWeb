@@ -290,16 +290,22 @@ CREATE POLICY "Drivers update delete own media" ON storage.objects
 
 -- Site Settings Seed
 INSERT INTO public.site_settings (key, value) VALUES
-  ('DEFAULT_WHATSAPP_NUMBER', '60138728630')
+  ('DEFAULT_WHATSAPP_NUMBER', '60127942974')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;
 
 -- Fleets Seed
 INSERT INTO public.fleets (id, name, driver_name, rate, seats, luggage, whatsapp_number, image_url, display_order, is_published) VALUES
-  ('vellfire taxi', 'Vellfire Taxi', 'Uncle Tan', 'SGD 220 per trip', '6 passengers', '2 large bags', '60138728630', '/images/fleet/vellfiretaxi.jpeg', 1, true),
-  ('tinnova-razali', 'Toyota Innova', 'Mr. Razali', 'SGD 120 per trip', '5 passengers', '4 large bags', '601137433099', '/images/fleet/toyotainnovapa.jpeg', 2, true),
-  ('tinnova-kawan', 'Toyota Innova', 'Mr. ?', 'SGD 120 per trip', '5 passengers', '2 large bags', '60127942974', '/images/fleet/toyotainnovakawan.jpeg', 3, true),
-  ('tinnova-elmee', 'Toyota Innova', 'Mr. Elmee', 'SGD 120 per trip', '5 passengers', '2 large bags', '60106656136', '/images/fleet/toyotainnovaelmee.jpeg', 4, true),
-  ('tinnova-kawan2', 'Toyota Innova', 'Mr. ?', 'SGD 120 per trip', '5 passengers', '2 large bags', '60127531753', '/images/fleet/toyotainnovakawan2.jpeg', 5, true)
+  ('tinnova-kawan', 'Toyota Innova', 'Mr. YY', 'SGD 120 per trip', '4 Seater', '4 large bags', '60127942974', '/images/fleet/toyotainnovayy.jpeg', 1, true),
+  ('ppersona', 'Proton Persona', 'Mr. Azwan', 'SGD 100 per trip', '4 Seater', '2 large bags', '60189094047', '/images/fleet/protonpersona2.jpeg', 2, true),
+  ('tinnova-elmee', 'Toyota Innova', 'Mr. Elmee', 'SGD 120 per trip', '4 Seater', '4 large bags', '60106656136', '/images/fleet/toyotainnovaelmees.jpeg', 3, true),
+  ('tinnova-kawan2', 'Toyota Innova', 'Mr.Khamisan', 'SGD 120 per trip', '4 Seater', '4 large bags', '60127531753', '/images/fleet/toyotainnovakhamisan.jpeg', 4, true),
+  ('pexoramalik', 'Proton Exora', 'Mr.Malik', 'SGD 120 per trip', '4 Seater', '4 large bags', '601117615585', '/images/fleet/protonexoramalik.jpeg', 5, true),
+  ('tinnova-yb', 'Toyota Innova', 'Mr.YB', 'SGD 120 per trip', '4 Seater', '4 large bags', '60142494247', '/images/fleet/toyotainnovayb.jpeg', 6, true),
+  ('tnoah-saiful', 'Toyota Noah (Singapore to Johor)', 'Mr.Saiful', 'SGD 140 per trip', '6 Seater', '4 large bags', '6588599366', '/images/fleet/toyotanoahsaiful.jpeg', 7, true),
+  ('pexoraman', 'Proton Exora', 'Mr. Man', 'SGD 120 per trip', '4 Seater', '4 large bags', '60177614385', '/images/fleet/vellfiretaximan2.jpeg', 8, true),
+  ('tinnova-razali', 'Toyota Innova', 'Mr. Razali', 'SGD 120 per trip', '4 Seater', '4 large bags', '601137433099', '/images/fleet/toyotainnovapa.jpeg', 9, true),
+  ('tinnova-samtino', 'Toyota Innova', 'Mr. Samtino', 'SGD 120 per trip', '4 Seater', '4 large bags', '601116177393', '/images/fleet/toyotainnovasamtino.jpeg', 10, true),
+  ('psagavvt', 'Proton Saga VVT', 'Mr. Alfah', 'SGD 100 per trip', '4 Seater', '4 large bags', '60127486709', '/images/fleet/protonsagavvt.jpeg', 11, true)
 ON CONFLICT (id) DO UPDATE SET
   name = EXCLUDED.name,
   driver_name = EXCLUDED.driver_name,
