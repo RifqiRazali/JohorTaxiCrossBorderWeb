@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles, Menu, X } from 'lucide-react';
+import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles, Menu, X, LogIn } from 'lucide-react';
 import { FLEET, SERVICES, DESTINATIONS, DEFAULT_WHATSAPP_NUMBER as WHATSAPP_NUMBER } from '../data/fleetData';
+import { fleetService } from '../services/fleetService';
 import logoImg from '../assets/logo.png';
 
 const HERO_IMG = 'https://images.hostinger.com/c44df599-dcaf-4e88-9c66-5b43829ed26b.png';
@@ -25,8 +26,6 @@ const openDestinationWhatsApp = (dest) => {
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 };
-
-
 
 const FAQS = [
   {
@@ -51,6 +50,33 @@ const HomePage = () => {
   const [activeTab, setActiveTab] = useState('johor');
   const [openFaq, setOpenFaq] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Dynamic Data State with Fallbacks
+  const [fleetsData, setFleetsData] = useState(FLEET);
+  const [servicesData, setServicesData] = useState(SERVICES);
+  const [destinationsData, setDestinationsData] = useState(DESTINATIONS);
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadDynamicData = async () => {
+      try {
+        const [dynamicFleets, dynamicServices, dynamicDestinations] = await Promise.all([
+          fleetService.getPublicFleets(),
+          fleetService.getPublicServices(),
+          fleetService.getPublicDestinations(),
+        ]);
+        if (isMounted) {
+          if (dynamicFleets) setFleetsData(dynamicFleets);
+          if (dynamicServices) setServicesData(dynamicServices);
+          if (dynamicDestinations) setDestinationsData(dynamicDestinations);
+        }
+      } catch (err) {
+        console.warn('Using fallback data:', err);
+      }
+    };
+    loadDynamicData();
+    return () => { isMounted = false; };
+  }, []);
 
   const scrollToSection = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -99,6 +125,13 @@ const HomePage = () => {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              to="/login"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20 border border-white/10"
+            >
+              <LogIn className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Portal Login</span>
+            </Link>
             <button
               onClick={() => scrollToSection('fleet')}
               className="rounded-full bg-emerald-500 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
@@ -129,7 +162,11 @@ const HomePage = () => {
               <button onClick={() => { scrollToSection('fleet'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Available Taxis &amp; Fares</button>
               <button onClick={() => { scrollToSection('destinations'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Popular Destinations</button>
               <button onClick={() => { scrollToSection('why-us'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Why Choose Us</button>
-              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition">FAQ</button>
+              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">FAQ</button>
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
+                <span>Portal Login (Driver / Admin)</span>
+                <LogIn className="h-5 w-5 text-emerald-400" />
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
@@ -190,7 +227,7 @@ const HomePage = () => {
           </div>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((srv) => (
+            {servicesData.map((srv) => (
               <motion.div
                 key={srv.id || srv.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -235,7 +272,7 @@ const HomePage = () => {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {FLEET.map((car, i) => (
+            {fleetsData.map((car, i) => (
               <motion.article
                 key={car.id || car.name}
                 initial={{ opacity: 0, y: 26 }}
@@ -310,7 +347,7 @@ const HomePage = () => {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {DESTINATIONS[activeTab].map((dest) => (
+            {(destinationsData[activeTab] || []).map((dest) => (
               <motion.div
                 key={dest.id || dest.name}
                 initial={{ opacity: 0, y: 20 }}
