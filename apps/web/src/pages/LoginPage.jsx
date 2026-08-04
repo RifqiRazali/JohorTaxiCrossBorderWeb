@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, LogIn, ArrowLeft, Lock, Mail, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getValidationMessage, loginSchema } from '../lib/zodSchemas';
-import { isSupabaseConfigured } from '../lib/supabaseClient';
+import { isSupabaseConfigured, REMEMBER_ME_KEY } from '../lib/supabaseClient';
 import { getDashboardPathForRole, AUTH_ROLES } from '../lib/authRoles';
 import logoImg from '../assets/logo.png';
 
@@ -16,6 +16,7 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -39,6 +40,10 @@ const LoginPage = () => {
 
     setIsSubmitting(true);
     try {
+      // Must be set before login() so the very first session write already
+      // lands in the right storage (localStorage vs sessionStorage).
+      window.localStorage.setItem(REMEMBER_ME_KEY, rememberMe ? 'true' : 'false');
+
       const data = await login(email, password);
       const userRole = data?.profile?.role || role;
       const targetDashboard = getDashboardPathForRole(userRole);
@@ -110,11 +115,13 @@ const LoginPage = () => {
             </p>
           </div>
 
-          {!isSupabaseConfigured && (
+          {/* Dev-only setup hint — stripped from production builds so a misconfiguration
+              never shows raw env var / backend-provider names to a real visitor. */}
+          {import.meta.env.DEV && !isSupabaseConfigured && (
             <div className="mt-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 p-4 text-xs text-amber-300 flex items-start gap-3">
               <AlertCircle className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold">Supabase credentials pending setup</p>
+                <p className="font-bold">Backend credentials pending setup</p>
                 <p className="mt-1 leading-relaxed text-amber-300/80">
                   Please set <code className="bg-slate-950 px-1 py-0.5 rounded font-mono text-[10px]">VITE_SUPABASE_URL</code> &amp; <code className="bg-slate-950 px-1 py-0.5 rounded font-mono text-[10px]">VITE_SUPABASE_ANON_KEY</code> in <code className="bg-slate-950 px-1 py-0.5 rounded font-mono text-[10px]">apps/web/.env</code> to connect live authentication.
                 </p>
@@ -122,31 +129,34 @@ const LoginPage = () => {
             </div>
           )}
 
-          {/* Test Credentials Helper Box */}
-          <div className="mt-5 rounded-2xl bg-slate-950/80 border border-slate-800 p-3.5 text-xs">
-            <div className="flex items-center justify-between text-slate-400 mb-2 font-semibold text-[11px] uppercase tracking-wider">
-              <span>Demo Test Accounts</span>
-              <span className="text-emerald-400 font-mono">Password: Password123!</span>
+          {/* Test Credentials Helper Box — dev-only, stripped from production builds so
+              real demo account credentials are never shipped to the public login page. */}
+          {import.meta.env.DEV && (
+            <div className="mt-5 rounded-2xl bg-slate-950/80 border border-slate-800 p-3.5 text-xs">
+              <div className="flex items-center justify-between text-slate-400 mb-2 font-semibold text-[11px] uppercase tracking-wider">
+                <span>Demo Test Accounts</span>
+                <span className="text-emerald-400 font-mono">Password: Password123!</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => { setEmail('admin@taxijohor.com'); setPassword('Password123!'); }}
+                  className="rounded-xl bg-slate-900 border border-slate-700/80 px-2.5 py-1.5 text-[11px] font-medium text-slate-200 transition hover:bg-slate-800 hover:text-emerald-400 text-left"
+                >
+                  <span className="font-bold text-white block">Admin Test</span>
+                  <span className="text-[10px] text-slate-400 truncate block">admin@taxijohor.com</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setEmail('driver@taxijohor.com'); setPassword('Password123!'); }}
+                  className="rounded-xl bg-slate-900 border border-slate-700/80 px-2.5 py-1.5 text-[11px] font-medium text-slate-200 transition hover:bg-slate-800 hover:text-emerald-400 text-left"
+                >
+                  <span className="font-bold text-white block">Driver Test</span>
+                  <span className="text-[10px] text-slate-400 truncate block">driver@taxijohor.com</span>
+                </button>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => { setEmail('admin@taxijohor.com'); setPassword('Password123!'); }}
-                className="rounded-xl bg-slate-900 border border-slate-700/80 px-2.5 py-1.5 text-[11px] font-medium text-slate-200 transition hover:bg-slate-800 hover:text-emerald-400 text-left"
-              >
-                <span className="font-bold text-white block">Admin Test</span>
-                <span className="text-[10px] text-slate-400 truncate block">admin@taxijohor.com</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => { setEmail('driver@taxijohor.com'); setPassword('Password123!'); }}
-                className="rounded-xl bg-slate-900 border border-slate-700/80 px-2.5 py-1.5 text-[11px] font-medium text-slate-200 transition hover:bg-slate-800 hover:text-emerald-400 text-left"
-              >
-                <span className="font-bold text-white block">Driver Test</span>
-                <span className="text-[10px] text-slate-400 truncate block">driver@taxijohor.com</span>
-              </button>
-            </div>
-          </div>
+          )}
 
           {errorMsg && (
             <motion.div
@@ -171,6 +181,7 @@ const LoginPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="driver@taxijohor.com"
+                  autoComplete="email"
                   required
                   className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition"
                 />
@@ -188,11 +199,22 @@ const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  autoComplete="current-password"
                   required
                   className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 pl-10 pr-4 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition"
                 />
               </div>
             </div>
+
+            <label className="flex items-center gap-2.5 py-2.5 text-xs font-medium text-slate-300 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="h-4 w-4 rounded border-slate-700 bg-slate-950 text-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:ring-offset-0 accent-emerald-500"
+              />
+              <span>Remember me on this device</span>
+            </label>
 
             <button
               type="submit"

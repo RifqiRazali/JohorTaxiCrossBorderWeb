@@ -7,12 +7,14 @@ import DriverDashboard from './pages/DriverDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { Toaster } from './components/ui/sonner';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <ScrollToTop />
+        <Toaster position="top-center" richColors closeButton />
         <Routes>
           {/* Public Customer Routes */}
           <Route path="/" element={<HomePage />} />

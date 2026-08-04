@@ -21,9 +21,11 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   full_name TEXT NOT NULL,
   role app_role NOT NULL DEFAULT 'driver',
   avatar_url TEXT,
+  expires_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now() + INTERVAL '1 year'),
   created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS expires_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now() + INTERVAL '1 year');
 
 -- Index for role lookup performance
 CREATE INDEX IF NOT EXISTS idx_profiles_role ON public.profiles(role);
@@ -50,12 +52,24 @@ CREATE TABLE IF NOT EXISTS public.fleets (
   luggage TEXT NOT NULL,
   whatsapp_number TEXT NOT NULL,
   image_url TEXT NOT NULL,
+  gallery_urls TEXT[] DEFAULT '{}'::text[],
   description TEXT,
+  direction TEXT NOT NULL DEFAULT 'jb-sg',
   is_published BOOLEAN NOT NULL DEFAULT true,
   display_order INT NOT NULL DEFAULT 0,
   created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
+ALTER TABLE public.fleets ADD COLUMN IF NOT EXISTS gallery_urls TEXT[] DEFAULT '{}'::text[];
+-- Route direction: 'jb-sg' (Johor -> Singapore) or 'sg-jb' (Singapore -> Johor), used to filter the public fleet list
+ALTER TABLE public.fleets ADD COLUMN IF NOT EXISTS direction TEXT NOT NULL DEFAULT 'jb-sg';
+-- One-time correction for the existing reverse-direction car seeded before this column existed
+UPDATE public.fleets SET direction = 'sg-jb' WHERE id = 'tnoah-saiful';
+
+-- Main vehicle photo focal point (0-100, matches CSS object-position %), lets a driver
+-- pan/crop which part of their photo is visible inside the fixed-aspect-ratio card frame
+ALTER TABLE public.fleets ADD COLUMN IF NOT EXISTS image_position_x NUMERIC NOT NULL DEFAULT 50;
+ALTER TABLE public.fleets ADD COLUMN IF NOT EXISTS image_position_y NUMERIC NOT NULL DEFAULT 50;
 
 CREATE INDEX IF NOT EXISTS idx_fleets_driver_id ON public.fleets(driver_id);
 CREATE INDEX IF NOT EXISTS idx_fleets_published ON public.fleets(is_published);
@@ -107,24 +121,63 @@ CREATE POLICY "Public profiles read" ON public.profiles
 
 DROP POLICY IF EXISTS "Users update own profile" ON public.profiles;
 CREATE POLICY "Users update own profile" ON public.profiles
-  FOR UPDATE USING (auth.uid() = id);
+  FOR UPDATE USING (auth.uid() = id)
+  WITH CHECK (
+    auth.uid() = id
+    AND role = public.get_user_role(auth.uid())
+    AND expires_at = (SELECT p.expires_at FROM public.profiles p WHERE p.id = auth.uid())
+  );
 
 DROP POLICY IF EXISTS "Admins full management on profiles" ON public.profiles;
 CREATE POLICY "Admins full management on profiles" ON public.profiles
   FOR ALL USING (public.get_user_role(auth.uid()) = 'admin');
 
 -- FLEETS RLS
+-- Public listing excludes vehicles whose assigned driver's account has expired
+-- (unassigned vehicles, i.e. driver_id IS NULL, are unaffected by this and remain governed by is_published alone).
 DROP POLICY IF EXISTS "Public read published fleets" ON public.fleets;
 CREATE POLICY "Public read published fleets" ON public.fleets
-  FOR SELECT USING (is_published = true);
+  FOR SELECT USING (
+    is_published = true
+    AND (
+      driver_id IS NULL
+      OR EXISTS (
+        SELECT 1 FROM public.profiles p
+        WHERE p.id = driver_id AND (p.expires_at IS NULL OR p.expires_at > now())
+      )
+    )
+  );
 
 DROP POLICY IF EXISTS "Drivers read own fleet" ON public.fleets;
 CREATE POLICY "Drivers read own fleet" ON public.fleets
   FOR SELECT USING (driver_id = auth.uid());
 
+-- Driver-only column locking (is_published, display_order) is enforced by the
+-- trg_enforce_driver_fleet_restrictions trigger below instead of a self-referencing
+-- RLS subquery -- a correlated subquery back onto "fleets" from within a fleets
+-- policy is fragile and previously caused "infinite recursion detected in policy
+-- for relation fleets" once a second SELECT-applicable policy existed on this table.
 DROP POLICY IF EXISTS "Drivers update own fleet" ON public.fleets;
 CREATE POLICY "Drivers update own fleet" ON public.fleets
-  FOR UPDATE USING (driver_id = auth.uid());
+  FOR UPDATE USING (driver_id = auth.uid())
+  WITH CHECK (driver_id = auth.uid());
+
+CREATE OR REPLACE FUNCTION public.enforce_driver_fleet_restrictions()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF public.get_user_role(auth.uid()) != 'admin' THEN
+    NEW.is_published := OLD.is_published;
+    NEW.display_order := OLD.display_order;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SET search_path = public;
+
+DROP TRIGGER IF EXISTS trg_enforce_driver_fleet_restrictions ON public.fleets;
+CREATE TRIGGER trg_enforce_driver_fleet_restrictions
+  BEFORE UPDATE ON public.fleets
+  FOR EACH ROW
+  EXECUTE FUNCTION public.enforce_driver_fleet_restrictions();
 
 DROP POLICY IF EXISTS "Admins full control fleets" ON public.fleets;
 CREATE POLICY "Admins full control fleets" ON public.fleets
@@ -287,6 +340,138 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
+-- Allows an Admin user to renew a driver's annual account status (+1 year)
+CREATE OR REPLACE FUNCTION public.admin_renew_driver(target_driver_id UUID, extend_months INT DEFAULT 12)
+RETURNS TIMESTAMPTZ AS $$
+DECLARE
+  new_expiration TIMESTAMPTZ;
+BEGIN
+  IF public.get_user_role(auth.uid()) != 'admin' THEN
+    RAISE EXCEPTION 'Access denied. Only Admins can renew driver accounts.';
+  END IF;
+
+  UPDATE public.profiles
+  SET expires_at = CASE
+        WHEN expires_at > timezone('utc'::text, now()) THEN expires_at + (extend_months || ' months')::INTERVAL
+        ELSE timezone('utc'::text, now()) + (extend_months || ' months')::INTERVAL
+      END,
+      updated_at = timezone('utc'::text, now())
+  WHERE id = target_driver_id
+  RETURNING expires_at INTO new_expiration;
+
+  RETURN new_expiration;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+-- Allows an Admin user to permanently delete a driver account and associated fleet
+CREATE OR REPLACE FUNCTION public.admin_delete_driver(target_driver_id UUID)
+RETURNS VOID AS $$
+BEGIN
+  IF public.get_user_role(auth.uid()) != 'admin' THEN
+    RAISE EXCEPTION 'Access denied. Only Admins can delete driver accounts.';
+  END IF;
+
+  -- 1. Remove fleet vehicles linked to driver
+  DELETE FROM public.fleets WHERE driver_id = target_driver_id;
+
+  -- 2. Remove profile record
+  DELETE FROM public.profiles WHERE id = target_driver_id;
+
+  -- 3. Remove auth identities and user account
+  DELETE FROM auth.identities WHERE user_id = target_driver_id;
+  DELETE FROM auth.users WHERE id = target_driver_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth;
+
+-- Allows an Admin user to reset a driver's login password to a new temporary one
+CREATE OR REPLACE FUNCTION public.admin_reset_driver_password(target_driver_id UUID, new_password TEXT)
+RETURNS VOID AS $$
+BEGIN
+  IF public.get_user_role(auth.uid()) != 'admin' THEN
+    RAISE EXCEPTION 'Access denied. Only Admins can reset driver passwords.';
+  END IF;
+
+  UPDATE auth.users
+  SET encrypted_password = crypt(new_password, gen_salt('bf', 10)),
+      updated_at = now()
+  WHERE id = target_driver_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, extensions;
+
+-- Allows an Admin to create a driver login and attach it to an EXISTING vehicle
+-- (preserving that vehicle's photo/rate/specs), instead of always creating a new one.
+CREATE OR REPLACE FUNCTION public.admin_provision_driver_for_fleet(
+  driver_email TEXT,
+  driver_password TEXT,
+  driver_full_name TEXT,
+  driver_phone TEXT,
+  target_fleet_id TEXT
+)
+RETURNS JSONB AS $$
+DECLARE
+  new_user_id UUID := gen_random_uuid();
+BEGIN
+  IF public.get_user_role(auth.uid()) != 'admin' THEN
+    RAISE EXCEPTION 'Access denied. Only Admins can provision driver accounts.';
+  END IF;
+
+  IF EXISTS (SELECT 1 FROM auth.users WHERE LOWER(email) = LOWER(driver_email)) THEN
+    RAISE EXCEPTION 'A driver account already exists for %. Use a different email.', LOWER(driver_email);
+  END IF;
+
+  IF NOT EXISTS (SELECT 1 FROM public.fleets WHERE id = target_fleet_id) THEN
+    RAISE EXCEPTION 'No vehicle found with id %.', target_fleet_id;
+  END IF;
+
+  IF EXISTS (SELECT 1 FROM public.fleets WHERE id = target_fleet_id AND driver_id IS NOT NULL) THEN
+    RAISE EXCEPTION 'Vehicle % already has a linked driver account.', target_fleet_id;
+  END IF;
+
+  -- 1. Insert into auth.users (email pre-confirmed)
+  INSERT INTO auth.users (
+    id, instance_id, aud, role, email, encrypted_password, email_confirmed_at,
+    confirmation_token, recovery_token, email_change_token_new,
+    email_change_token_current, email_change, phone_change, phone_change_token,
+    raw_app_meta_data, raw_user_meta_data, created_at, updated_at
+  )
+  VALUES (
+    new_user_id, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated',
+    LOWER(driver_email), crypt(driver_password, gen_salt('bf', 10)), now(),
+    '', '', '', '', '', '', '',
+    '{"provider":"email","providers":["email"]}',
+    json_build_object('full_name', driver_full_name, 'phone_number', driver_phone, 'role', 'driver')::jsonb,
+    now(), now()
+  );
+
+  -- 2. Insert into auth.identities
+  IF NOT EXISTS (SELECT 1 FROM auth.identities WHERE user_id = new_user_id) THEN
+    INSERT INTO auth.identities (
+      id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+    )
+    VALUES (
+      gen_random_uuid(), new_user_id, new_user_id::text,
+      json_build_object('sub', new_user_id, 'email', LOWER(driver_email))::jsonb,
+      'email', now(), now(), now()
+    );
+  END IF;
+
+  -- 3. Upsert Profile as Driver
+  INSERT INTO public.profiles (id, full_name, role)
+  VALUES (new_user_id, driver_full_name, 'driver')
+  ON CONFLICT (id) DO UPDATE SET role = 'driver', full_name = driver_full_name;
+
+  -- 4. Link the driver to the existing vehicle, preserving its photo/rate/specs
+  UPDATE public.fleets
+  SET driver_id = new_user_id,
+      driver_name = driver_full_name,
+      whatsapp_number = driver_phone,
+      updated_at = now()
+  WHERE id = target_fleet_id;
+
+  RETURN jsonb_build_object('driver_id', new_user_id, 'fleet_id', target_fleet_id);
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, extensions;
+
 
 
 -- 10. STORAGE BUCKET CONFIGURATION & RLS POLICIES
@@ -295,24 +480,49 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES ('fleet-media', 'fleet-media', true)
 ON CONFLICT (id) DO NOTHING;
 
--- Public bucket read
+-- Intentionally no public SELECT policy on storage.objects for this bucket.
+-- The bucket is created with `public = true`, which already serves individual
+-- file contents at /storage/v1/object/public/fleet-media/<path> to anyone,
+-- regardless of storage.objects RLS -- that's how the website displays photos.
+-- A permissive SELECT policy here would additionally let any client (including
+-- anonymous ones) call storage.list()/query storage.objects to enumerate every
+-- filename in the bucket, which the app never needs (it only ever references
+-- images by their already-known public URL). Listing/managing files remains
+-- available to drivers for their own folder and to admins for everything via
+-- the "Drivers update delete own media" FOR ALL policy below.
 DROP POLICY IF EXISTS "Public media read" ON storage.objects;
-CREATE POLICY "Public media read" ON storage.objects
-  FOR SELECT USING (bucket_id = 'fleet-media');
 
 -- Driver upload to own folder / fleets
+-- Scoped to paths containing the caller's own uid (e.g. fleets/<uid>/.., fleets/gallery/<uid>/..);
+-- admins keep unrestricted access (e.g. for fleets/new-drivers/.. during provisioning).
 DROP POLICY IF EXISTS "Drivers upload own media" ON storage.objects;
 CREATE POLICY "Drivers upload own media" ON storage.objects
   FOR INSERT WITH CHECK (
     bucket_id = 'fleet-media' AND
-    auth.role() = 'authenticated'
+    auth.role() = 'authenticated' AND
+    (
+      public.get_user_role(auth.uid()) = 'admin'
+      OR auth.uid()::text = ANY(storage.foldername(name))
+    )
   );
 
 DROP POLICY IF EXISTS "Drivers update delete own media" ON storage.objects;
 CREATE POLICY "Drivers update delete own media" ON storage.objects
   FOR ALL USING (
     bucket_id = 'fleet-media' AND
-    auth.role() = 'authenticated'
+    auth.role() = 'authenticated' AND
+    (
+      public.get_user_role(auth.uid()) = 'admin'
+      OR auth.uid()::text = ANY(storage.foldername(name))
+    )
+  )
+  WITH CHECK (
+    bucket_id = 'fleet-media' AND
+    auth.role() = 'authenticated' AND
+    (
+      public.get_user_role(auth.uid()) = 'admin'
+      OR auth.uid()::text = ANY(storage.foldername(name))
+    )
   );
 
 
@@ -352,7 +562,7 @@ INSERT INTO public.services (id, title, description, image_url, display_order, i
   ('airport', 'AIRPORT TRANSFER', 'Seamless transfers for Changi Airport (SG), Senai International Airport (JHB) & Seletar Airport.', 'https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=800&q=80', 1, true),
   ('corporate', 'CORPORATE JOB', '5-star executive transport for business meetings, cross-border corporate events & VIP clients.', 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80', 2, true),
   ('tour', 'PRIVATE TOUR', 'Customized day tours to top attractions across Singapore and Johor with comfortable private rides.', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', 3, true),
-  ('outstation', 'OUTSTATION TRIP', 'Long-distance transfers to Desaru, Malacca, Genting Highlands, Mersing Jetty & beyond.', 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80', 4, true)
+  ('outstation', 'OUTSTATION TRIP', 'Long-distance transfers to Desaru, Malacca, Genting Highlands, Mersing Jetty & beyond.', '/images/fleet/vellfiretaximan.jpeg', 4, true)
 ON CONFLICT (id) DO UPDATE SET
   title = EXCLUDED.title,
   description = EXCLUDED.description,

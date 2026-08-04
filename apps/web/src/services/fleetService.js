@@ -34,7 +34,11 @@ export const fleetService = {
         luggage: item.luggage,
         whatsappNumber: item.whatsapp_number,
         image: item.image_url,
+        imagePositionX: item.image_position_x ?? 50,
+        imagePositionY: item.image_position_y ?? 50,
+        galleryUrls: item.gallery_urls || [],
         description: item.description,
+        direction: item.direction || 'jb-sg',
         isPublished: item.is_published,
       }));
     } catch (err) {
@@ -111,7 +115,7 @@ export const fleetService = {
    */
   async getDriverFleet(driverId) {
     if (!isSupabaseConfigured || !supabase) {
-      throw new Error('Supabase is not configured.');
+      throw new Error('The system is not set up correctly. Please contact the site administrator.');
     }
 
     const { data, error } = await supabase
@@ -133,7 +137,11 @@ export const fleetService = {
       luggage: data.luggage,
       whatsappNumber: data.whatsapp_number,
       image: data.image_url,
+      imagePositionX: data.image_position_x ?? 50,
+      imagePositionY: data.image_position_y ?? 50,
+      galleryUrls: data.gallery_urls || [],
       description: data.description,
+      direction: data.direction || 'jb-sg',
       isPublished: data.is_published,
     };
   },
@@ -143,7 +151,7 @@ export const fleetService = {
    */
   async updateDriverFleet(fleetId, payload) {
     if (!isSupabaseConfigured || !supabase) {
-      throw new Error('Supabase is not configured.');
+      throw new Error('The system is not set up correctly. Please contact the site administrator.');
     }
 
     const { data, error } = await supabase
@@ -156,7 +164,11 @@ export const fleetService = {
         luggage: payload.luggage,
         whatsapp_number: payload.whatsappNumber,
         image_url: payload.imageUrl,
+        image_position_x: payload.imagePositionX ?? 50,
+        image_position_y: payload.imagePositionY ?? 50,
+        gallery_urls: payload.galleryUrls || [],
         description: payload.description,
+        direction: payload.direction,
         updated_at: new Date().toISOString(),
       })
       .eq('id', fleetId)
@@ -172,30 +184,76 @@ export const fleetService = {
    */
   async getAllFleetsAdmin() {
     if (!isSupabaseConfigured || !supabase) {
-      return FLEET.map((f) => ({ ...f, isPublished: true }));
+      return FLEET.map((f, i) => {
+        const now = new Date();
+        const fakeExpiry = new Date(now.setFullYear(now.getFullYear() + 1)).toISOString();
+        return {
+          ...f,
+          isPublished: true,
+          driverId: f.driverName ? `driver-${i}` : null,
+          expiresAt: fakeExpiry,
+        };
+      });
     }
 
-    const { data, error } = await supabase
+    let data = null;
+    let error = null;
+
+    const res = await supabase
       .from('fleets')
-      .select('*, profiles:driver_id(full_name)')
+      .select('*, profiles:driver_id(full_name, created_at, expires_at)')
       .order('display_order', { ascending: true });
 
-    if (error) throw error;
+    data = res.data;
+    error = res.error;
 
-    return data.map((item) => ({
-      id: item.id,
-      driverId: item.driver_id,
-      name: item.name,
-      driverName: item.driver_name,
-      assignedDriverName: item.profiles?.full_name || null,
-      rate: item.rate,
-      seats: item.seats,
-      luggage: item.luggage,
-      whatsappNumber: item.whatsapp_number,
-      image: item.image_url,
-      description: item.description,
-      isPublished: item.is_published,
-    }));
+    if (error) {
+      console.warn('getAllFleetsAdmin joined select error, trying simple select:', error.message);
+      const resFallback = await supabase.from('fleets').select('*').order('display_order', { ascending: true });
+      data = resFallback.data;
+      if (resFallback.error) throw resFallback.error;
+    }
+
+    return (data || []).map((item) => {
+      const rawExpiresAt = item.profiles?.expires_at;
+      let expiresAt = rawExpiresAt;
+      if (!expiresAt) {
+        const baseDate = item.profiles?.created_at
+          ? new Date(item.profiles.created_at)
+          : item.created_at
+          ? new Date(item.created_at)
+          : new Date();
+        const futureDate = new Date(baseDate);
+        futureDate.setFullYear(futureDate.getFullYear() + 1);
+        expiresAt = futureDate.toISOString();
+      }
+
+      // Whether this vehicle is currently hidden from the public site by the
+      // "Public read published fleets" RLS policy despite isPublished=true,
+      // because its assigned driver's account has expired.
+      const isDriverExpired = Boolean(item.driver_id) && Boolean(rawExpiresAt) && new Date(rawExpiresAt) < new Date();
+
+      return {
+        id: item.id,
+        driverId: item.driver_id,
+        name: item.name,
+        driverName: item.driver_name,
+        assignedDriverName: item.profiles?.full_name || null,
+        expiresAt: expiresAt || null,
+        isDriverExpired,
+        rate: item.rate,
+        seats: item.seats,
+        luggage: item.luggage,
+        whatsappNumber: item.whatsapp_number,
+        image: item.image_url,
+        imagePositionX: item.image_position_x ?? 50,
+        imagePositionY: item.image_position_y ?? 50,
+        galleryUrls: item.gallery_urls || [],
+        description: item.description,
+        direction: item.direction || 'jb-sg',
+        isPublished: item.is_published,
+      };
+    });
   },
 
   /**
@@ -203,7 +261,7 @@ export const fleetService = {
    */
   async toggleFleetPublishStatus(fleetId, isPublished) {
     if (!isSupabaseConfigured || !supabase) {
-      throw new Error('Supabase is not configured.');
+      throw new Error('The system is not set up correctly. Please contact the site administrator.');
     }
 
     const { error } = await supabase
