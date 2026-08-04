@@ -5,8 +5,11 @@
  * Adding, editing, or deleting items here will automatically update the website!
  */
 
-// Fallback WhatsApp number for general inquiries & dispatch
+// Fallback WhatsApp number for general customer inquiries, booking questions & dispatch
 export const DEFAULT_WHATSAPP_NUMBER = '60127942974';
+
+// WhatsApp number for the admin who handles driver account creation, renewals & user management
+export const DEFAULT_MANAGEMENT_WHATSAPP_NUMBER = '601137433099';
 
 
 /* ==========================================================================
@@ -24,8 +27,10 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60127942974',
     image: '/images/fleet/toyotainnovayy.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
-    {
+  {
     id: 'ppersona',
     name: 'Proton Persona',
     driverName: 'Mr. Azwan',
@@ -34,6 +39,8 @@ export const FLEET = [
     luggage: '2 large bags',
     whatsappNumber: '60189094047',
     image: '/images/fleet/protonpersona2.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
   {
     id: 'tinnova-elmee',
@@ -44,6 +51,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60106656136',
     image: '/images/fleet/toyotainnovaelmees.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
   {
     id: 'tinnova-kawan2',
@@ -54,8 +63,10 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60127531753',
     image: '/images/fleet/toyotainnovakhamisan.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
-   {
+  {
     id: 'pexoramalik',
     name: 'Proton Exora',
     driverName: 'Mr.Malik',
@@ -64,6 +75,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '601117615585',
     image: '/images/fleet/protonexoramalik.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
   {
     id: 'tinnova-yb',
@@ -74,6 +87,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60142494247',
     image: '/images/fleet/toyotainnovayb.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
   {
     id: 'tnoah-saiful',
@@ -84,6 +99,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '6588599366',
     image: '/images/fleet/toyotanoahsaiful.jpeg',
+    galleryUrls: [],
+    direction: 'sg-jb',
   },
   {
     id: 'pexoraman',
@@ -94,6 +111,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60177614385',
     image: '/images/fleet/vellfiretaximan2.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
   {
     id: 'tinnova-razali',
@@ -104,8 +123,10 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '601137433099',
     image: '/images/fleet/toyotainnovapa.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
-   {
+  {
     id: 'tinnova-samtino',
     name: 'Toyota Innova',
     driverName: 'Mr. Samtino',
@@ -114,6 +135,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '601116177393',
     image: '/images/fleet/toyotainnovasamtino.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
   {
     id: 'psagavvt',
@@ -124,6 +147,8 @@ export const FLEET = [
     luggage: '4 large bags',
     whatsappNumber: '60127486709',
     image: '/images/fleet/protonsagavvt.jpeg',
+    galleryUrls: [],
+    direction: 'jb-sg',
   },
 ];
 
@@ -156,7 +181,7 @@ export const SERVICES = [
     id: 'outstation',
     title: 'OUTSTATION TRIP',
     desc: 'Long-distance transfers to Desaru, Malacca, Genting Highlands, Mersing Jetty & beyond.',
-    image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80',
+    image: '/images/fleet/vellfiretaximan.jpeg',
   },
 ];
 

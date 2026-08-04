@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles, Menu, X } from 'lucide-react';
+import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles, Menu, X, Camera, LogIn } from 'lucide-react';
 import { FLEET, SERVICES, DESTINATIONS, DEFAULT_WHATSAPP_NUMBER as WHATSAPP_NUMBER } from '../data/fleetData';
+import { fleetService } from '../services/fleetService';
 import logoImg from '../assets/logo.png';
 
 const HERO_IMG = 'https://images.hostinger.com/c44df599-dcaf-4e88-9c66-5b43829ed26b.png';
@@ -15,18 +16,35 @@ const openDriverWhatsApp = (car) => {
     return;
   }
   const driverText = car.driverName ? ` (Driver: ${car.driverName})` : '';
-  const text = `Hello! I am interested in booking the Johor ⟶ Singapore Taxi *${car.name}* (${car.rate})${driverText}.\n\nPlease let me know availability and details for my travel date.`;
+  const text = `Hello! I am interested in booking the Johor ⟷ Singapore Taxi *${car.name}*${driverText}.\n\nPlease let me know availability and details for my travel date.`;
   const url = `https://wa.me/${targetNumber}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 };
 
 const openDestinationWhatsApp = (dest) => {
-  const text = `Hello! I am interested in a Johor ⟶ Singapore taxi transfer to/from *${dest.name}* (${dest.location}).\n\nPlease quote the fare and availability.`;
+  const text = `Hello! I am interested in a Johor ⟷ Singapore taxi transfer to/from *${dest.name}* (${dest.location}).\n\nPlease quote the fare and availability.`;
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank', 'noopener,noreferrer');
 };
 
+const STANDARD_6_MODELS = [
+  'Honda Stepwagon', 'Perodua Alza', 'Proton Exora', 'Suzuki Landy',
+  'Toyota Avanza', 'Toyota Esquire', 'Toyota Estima', 'Toyota Noah',
+  'Toyota Innova', 'Toyota Sienta', 'Toyota Wish', 'Toyota Voxy',
+];
 
+const PREMIUM_6_MODELS = [
+  'Toyota Alphard', 'Toyota Vellfire', 'Hyundai Staria', 'Hyundai Starex',
+  'Mercedes Benz V220D', 'Mercedes Benz V-Class', 'BYD Denza D9',
+  'Volkswagen ID. Buzz', 'Nissan Elgrand', 'Xpeng X9', 'Zeekr 009',
+];
+
+const FARE_ROWS = [
+  { pickup: 'Ban San Street Terminal in Singapore', pickupSpan: 2, dropoff: 'Larkin or up to 35km', standard4: 'SGD 80/taxi', standard6: 'SGD 120/taxi', premium6: 'SGD 180/taxi', shade: false },
+  { dropoff: 'All Other Area >35km', standard4: '+SGD 20/taxi', standard6: '+SGD 30/taxi', premium6: '+SGD 30/taxi', shade: true },
+  { pickup: 'Larkin Sentral in Johor Bahru', pickupSpan: 2, dropoff: 'Ban San or up to 35km', standard4: 'RM 240/taxi', standard6: 'RM 360/taxi', premium6: 'RM 540/taxi', shade: false },
+  { dropoff: 'All Other Area >35km', standard4: '+RM 60/taxi', standard6: '+RM 90/taxi', premium6: '+RM 90/taxi', shade: true },
+];
 
 const FAQS = [
   {
@@ -49,8 +67,46 @@ const FAQS = [
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState('johor');
+  const [fleetDirectionTab, setFleetDirectionTab] = useState('jb-sg');
   const [openFaq, setOpenFaq] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Dynamic Data State with Fallbacks (keeps admin/driver-published edits live on the site)
+  const [fleetsData, setFleetsData] = useState(FLEET);
+  const [servicesData, setServicesData] = useState(SERVICES);
+  const [destinationsData, setDestinationsData] = useState(DESTINATIONS);
+
+  // Modal State for Car Details & Photo Gallery
+  const [selectedCarForDetails, setSelectedCarForDetails] = useState(null);
+  const [activeModalPhoto, setActiveModalPhoto] = useState('');
+
+  const openCarDetailsModal = (car) => {
+    setSelectedCarForDetails(car);
+    const mainImg = typeof car.image === 'string' ? car.image : (car.image?.default || car.image);
+    setActiveModalPhoto(mainImg);
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadDynamicData = async () => {
+      try {
+        const [dynamicFleets, dynamicServices, dynamicDestinations] = await Promise.all([
+          fleetService.getPublicFleets(),
+          fleetService.getPublicServices(),
+          fleetService.getPublicDestinations(),
+        ]);
+        if (isMounted) {
+          if (dynamicFleets) setFleetsData(dynamicFleets);
+          if (dynamicServices) setServicesData(dynamicServices);
+          if (dynamicDestinations) setDestinationsData(dynamicDestinations);
+        }
+      } catch (err) {
+        console.warn('Using fallback data:', err);
+      }
+    };
+    loadDynamicData();
+    return () => { isMounted = false; };
+  }, []);
 
   const scrollToSection = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -60,20 +116,22 @@ const HomePage = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const filteredFleets = fleetsData.filter((car) => (car.direction || 'jb-sg') === fleetDirectionTab);
+
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-emerald-200">
       <Helmet>
-        <title>Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service</title>
-        <meta name="description" content="Taxi Johor Cross Border provides official Johor ⟶ Singapore cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations. Airport transfers, corporate jobs, private tours &amp; outstation trips." />
+        <title>Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service</title>
+        <meta name="description" content="Taxi Johor Cross Border provides official Johor ⟷ Singapore cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations. Airport transfers, corporate jobs, private tours & outstation trips." />
         <link rel="canonical" href="https://taxijohorcrossborder.com/" />
-        <meta property="og:title" content="Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service" />
-        <meta property="og:description" content="Taxi Johor Cross Border provides official Johor ⟶ Singapore cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations." />
+        <meta property="og:title" content="Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service" />
+        <meta property="og:description" content="Taxi Johor Cross Border provides official Johor ⟷ Singapore cross-border taxi transfers covering Johor Bahru, Desaru, Legoland, Senai, Mersing and all Johor destinations." />
         <meta property="og:url" content="https://taxijohorcrossborder.com/" />
         <meta property="og:site_name" content="Taxi Johor Cross Border" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Taxi Johor Cross Border | Johor ⟶ Singapore Taxi Service" />
-        <meta name="twitter:description" content="Official Johor ⟶ Singapore cross-border taxi transfers. Airport transfers, corporate jobs, private tours &amp; outstation trips." />
+        <meta name="twitter:title" content="Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service" />
+        <meta name="twitter:description" content="Official Johor ⟷ Singapore cross-border taxi transfers. Airport transfers, corporate jobs, private tours & outstation trips." />
         <link rel="icon" type="image/png" href="/images/logo.png" />
       </Helmet>
 
@@ -86,19 +144,27 @@ const HomePage = () => {
             </div>
             <div>
               <span className="font-display text-base sm:text-2xl font-extrabold tracking-tight block leading-tight text-white">Taxi Johor Cross Border</span>
-              <span className="text-[11px] sm:text-sm text-emerald-400 font-semibold tracking-wide block">Johor ⟶ Singapore Taxi</span>
+              <span className="text-[11px] sm:text-sm text-emerald-400 font-semibold tracking-wide block">Johor ⟷ Singapore Taxi</span>
             </div>
           </div>
-          
+
           <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-white/90">
             <button onClick={() => scrollToSection('services')} className="transition hover:text-emerald-400">Services</button>
             <button onClick={() => scrollToSection('fleet')} className="transition hover:text-emerald-400">Available Taxis</button>
+            <button onClick={() => scrollToSection('fares')} className="transition hover:text-emerald-400">Fares</button>
             <button onClick={() => scrollToSection('destinations')} className="transition hover:text-emerald-400">Destinations</button>
             <button onClick={() => scrollToSection('why-us')} className="transition hover:text-emerald-400">Why Us</button>
             <button onClick={() => scrollToSection('faq')} className="transition hover:text-emerald-400">FAQ</button>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              to="/login"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/20 border border-white/10"
+            >
+              <LogIn className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Portal Login</span>
+            </Link>
             <button
               onClick={() => scrollToSection('fleet')}
               className="rounded-full bg-emerald-500 px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/25"
@@ -126,10 +192,15 @@ const HomePage = () => {
               className="absolute inset-x-0 top-full bg-slate-950/95 border-b border-slate-800 backdrop-blur-2xl px-6 py-6 shadow-2xl lg:hidden flex flex-col gap-4 z-40"
             >
               <button onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Services</button>
-              <button onClick={() => { scrollToSection('fleet'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Available Taxis &amp; Fares</button>
+              <button onClick={() => { scrollToSection('fleet'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Available Taxis</button>
+              <button onClick={() => { scrollToSection('fares'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Fares</button>
               <button onClick={() => { scrollToSection('destinations'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Popular Destinations</button>
               <button onClick={() => { scrollToSection('why-us'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">Why Choose Us</button>
-              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition">FAQ</button>
+              <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="text-left font-bold text-base text-white hover:text-emerald-400 py-1.5 transition border-b border-slate-900">FAQ</button>
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-left font-extrabold text-base text-emerald-400 py-2 flex items-center justify-between rounded-xl bg-emerald-950/60 border border-emerald-500/30 px-4">
+                <span>Portal Login (Driver / Admin)</span>
+                <LogIn className="h-5 w-5 text-emerald-400" />
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
@@ -145,27 +216,27 @@ const HomePage = () => {
             className="max-w-3xl"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 ring-1 ring-emerald-400/50">
-              <MapPin className="h-3.5 w-3.5" /> Johor ⟶ Singapore &amp; All Destinations
+              <MapPin className="h-3.5 w-3.5" /> Johor ⟷ Singapore & All Destinations
             </span>
             <h1 className="mt-5 sm:mt-6 font-display text-3xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] sm:leading-[1.03] tracking-tight text-white">
-              Johor ⟶ Singapore{' '}
+              Johor ⟷ Singapore{' '}
               <span className="relative inline-block text-emerald-400">
                 Door-To-Door
               </span>{' '}
               Cross-Border Taxi
             </h1>
             <p className="mt-5 sm:mt-7 max-w-xl text-base sm:text-xl leading-relaxed text-slate-100">
-              Comfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing &amp; more). <strong className="text-white">Stay inside the taxi at Woodlands &amp; Tuas customs</strong> — no lugging bags through immigration counters.
+              Comfortable direct taxi transfers between Johor and Singapore covering all destinations across Johor State (Johor Bahru, Desaru, Legoland, Senai, Mersing & more). <strong className="text-white">Stay inside the taxi at Woodlands & Tuas customs</strong> — no lugging bags through immigration counters.
             </p>
             <div className="mt-7 sm:mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 onClick={() => scrollToSection('fleet')}
                 className="group inline-flex min-h-[50px] sm:min-h-[52px] items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 sm:px-8 text-sm sm:text-base font-bold text-slate-950 shadow-xl shadow-emerald-500/25 transition hover:bg-emerald-400 active:scale-[0.98]"
               >
-                View Johor-SG Taxis &amp; Drivers
+                View Johor-SG Taxis & Drivers
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
-              <span className="text-xs sm:text-sm font-medium text-slate-200 text-center sm:text-left">Woodlands &amp; Tuas Clearance Included</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-200 text-center sm:text-left">Woodlands & Tuas Clearance Included</span>
             </div>
 
             <dl className="mt-10 sm:mt-14 grid max-w-xl grid-cols-3 gap-2 sm:gap-6 border-t border-white/15 pt-5 sm:pt-7">
@@ -186,11 +257,11 @@ const HomePage = () => {
           <div className="text-center">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-emerald-400">Professional Taxi Service</p>
             <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight uppercase sm:text-6xl text-white">Our Service</h2>
-            <p className="mt-3 text-slate-400 text-base max-w-lg mx-auto">We Provide Professional &amp; Efficient Service To Our Client</p>
+            <p className="mt-3 text-slate-400 text-base max-w-lg mx-auto">We Provide Professional & Efficient Service To Our Client</p>
           </div>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((srv) => (
+            {servicesData.map((srv) => (
               <motion.div
                 key={srv.id || srv.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -208,8 +279,8 @@ const HomePage = () => {
                 </div>
                 <div className="flex flex-1 flex-col justify-between p-6">
                   <div>
-                    <h3 className="font-display text-xl font-extrabold uppercase tracking-wide text-white group-hover:text-emerald-400 transition">{srv.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-300">{srv.desc}</p>
+                    <h3 className="font-display text-xl font-extrabold uppercase tracking-wide text-white group-hover:text-emerald-400 transition break-words">{srv.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-300 break-words whitespace-pre-line">{srv.desc}</p>
                   </div>
                   <button
                     onClick={() => scrollToSection('fleet')}
@@ -228,56 +299,184 @@ const HomePage = () => {
       {/* 4. Fleet Section */}
       <section id="fleet" className="scroll-mt-16 bg-slate-50 py-20 sm:py-28">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Johor ⟶ Singapore Fleet</p>
-            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Pick your Johor-SG taxi &amp; chat on WhatsApp</h2>
-            <p className="mt-4 text-lg text-slate-600">Every rate below covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.</p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Johor ⟷ Singapore Fleet</p>
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Pick your Johor-SG taxi & chat on WhatsApp</h2>
+              <p className="mt-4 text-lg text-slate-600">
+                Pick any taxi and chat directly with the driver on WhatsApp. See our{' '}
+                <button type="button" onClick={() => scrollToSection('fares')} className="font-bold text-emerald-700 underline underline-offset-2 hover:text-emerald-800">official fare table</button>
+                {' '}below for pricing — every fare covers the full door-to-door taxi trip between Johor and Singapore: taxi driver, fuel, Woodlands/Tuas tolls and border clearance.
+              </p>
+            </div>
+
+            {/* Route Direction Tab Selector */}
+            <div className="grid grid-cols-2 w-full md:w-auto items-center gap-1 sm:gap-2 rounded-2xl bg-slate-100 p-1.5 ring-1 ring-slate-200/80">
+              <button
+                onClick={() => setFleetDirectionTab('jb-sg')}
+                className={`rounded-xl px-3 sm:px-5 py-2.5 text-xs sm:text-sm font-bold transition text-center ${fleetDirectionTab === 'jb-sg' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
+              >
+                Johor-Singapore
+              </button>
+              <button
+                onClick={() => setFleetDirectionTab('sg-jb')}
+                className={`rounded-xl px-3 sm:px-5 py-2.5 text-xs sm:text-sm font-bold transition text-center ${fleetDirectionTab === 'sg-jb' ? 'bg-emerald-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
+              >
+                Singapore-Johor
+              </button>
+            </div>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {FLEET.map((car, i) => (
-              <motion.article
-                key={car.id || car.name}
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
-                className="group flex flex-col h-full overflow-hidden rounded-3xl bg-white shadow-[0_2px_20px_-8px_rgba(15,42,35,0.25)] ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(15,42,35,0.4)]"
+          {filteredFleets.length === 0 && (
+            <div className="mt-12 rounded-3xl bg-white border border-slate-200 p-10 text-center">
+              <p className="text-slate-600">No taxis currently listed for this route. Please check the other tab or message us directly.</p>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700"
               >
-                <div className="relative overflow-hidden bg-slate-100">
-                  <img
-                    src={typeof car.image === 'string' ? car.image : (car.image?.default || car.image)}
-                    alt={`${car.name} Johor to Singapore cross border taxi`}
-                    loading="lazy"
-                    className={`h-52 w-full transition-transform duration-500 group-hover:scale-105 ${car.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover'} ${car.imagePosition ? `object-${car.imagePosition}` : 'object-center'}`}
-                  />
-                  <span className="absolute left-4 top-4 rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur">{car.rate}</span>
-                </div>
-                <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
-                  <div>
-                    <h3 className="font-display text-xl font-bold text-slate-900">{car.name}</h3>
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
-                      {car.driverName && (
-                        <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-800 bg-emerald-50 rounded-md px-2 py-1"><User className="h-3.5 w-3.5 text-emerald-600 shrink-0" />Driver: {car.driverName}</span>
-                      )}
-                      <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Users className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.seats}</span>
-                      <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1"><Briefcase className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.luggage}</span>
-                      <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-700 bg-emerald-50/80 border border-emerald-200/60 rounded-md px-2 py-1"><ShieldCheck className="h-3.5 w-3.5 text-emerald-600 shrink-0" />Licensed Taxi</span>
-                    </div>
-                    {car.desc && <p className="mt-4 text-sm leading-relaxed text-slate-600">{car.desc}</p>}
+                <MessageCircle className="h-4 w-4" />
+                <span>Ask on WhatsApp</span>
+              </a>
+            </div>
+          )}
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredFleets.map((car, i) => {
+              const galleryCount = (car.galleryUrls || []).length;
+              return (
+                <motion.article
+                  key={car.id || car.name}
+                  initial={{ opacity: 0, y: 26 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
+                  className="group flex flex-col h-full overflow-hidden rounded-3xl bg-white shadow-[0_2px_20px_-8px_rgba(15,42,35,0.25)] ring-1 ring-slate-900/5 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(15,42,35,0.4)] cursor-pointer"
+                  onClick={() => openCarDetailsModal(car)}
+                >
+                  <div className="relative overflow-hidden bg-slate-100">
+                    <img
+                      src={typeof car.image === 'string' ? car.image : (car.image?.default || car.image)}
+                      alt={`${car.name} Johor to Singapore cross border taxi`}
+                      loading="lazy"
+                      className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectPosition: `${car.imagePositionX ?? 50}% ${car.imagePositionY ?? 50}%` }}
+                    />
+                    {galleryCount > 0 && (
+                      <span className="absolute right-4 top-4 rounded-full bg-slate-950/85 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur flex items-center gap-1">
+                        <Camera className="h-3 w-3 text-emerald-400" /> +{galleryCount} photos
+                      </span>
+                    )}
                   </div>
-                  
-                  {/* Fixed Bottom-Aligned WhatsApp CTA Button */}
-                  <button
-                    onClick={() => openDriverWhatsApp(car)}
-                    className="mt-6 flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition duration-200 hover:bg-emerald-700 active:scale-[0.98]"
-                  >
-                    <MessageCircle className="h-4 w-4 shrink-0" />
-                    <span>Book via WhatsApp</span>
-                  </button>
-                </div>
-              </motion.article>
-            ))}
+                  <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
+                    <div>
+                      <h3 className="font-display text-xl font-bold text-slate-900 break-words">{car.name}</h3>
+                      <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
+                        {car.driverName && (
+                          <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-800 bg-emerald-50 rounded-md px-2 py-1 max-w-full break-words"><User className="h-3.5 w-3.5 text-emerald-600 shrink-0" />Driver: {car.driverName}</span>
+                        )}
+                        <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1 max-w-full break-words"><Users className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.seats}</span>
+                        <span className="inline-flex items-center gap-1.5 bg-slate-100 rounded-md px-2 py-1 max-w-full break-words"><Briefcase className="h-3.5 w-3.5 text-emerald-600 shrink-0" />{car.luggage}</span>
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-700 bg-emerald-50/80 border border-emerald-200/60 rounded-md px-2 py-1"><ShieldCheck className="h-3.5 w-3.5 text-emerald-600 shrink-0" />Licensed Taxi</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openCarDetailsModal(car);
+                        }}
+                        className="flex-1 min-h-[46px] rounded-xl bg-slate-100 border border-slate-200 px-3 text-xs font-bold text-slate-700 transition hover:bg-slate-200 hover:text-slate-900"
+                      >
+                        View Details & Photos
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openDriverWhatsApp(car);
+                        }}
+                        className="flex min-h-[46px] items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-4 text-xs font-bold text-white shadow-md shadow-emerald-600/20 transition duration-200 hover:bg-emerald-700 active:scale-[0.98]"
+                      >
+                        <MessageCircle className="h-4 w-4 shrink-0" />
+                        <span>Book via WhatsApp</span>
+                      </button>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 4b. Official Fare Table (Annex C - Revised Street-Hail Fares) */}
+      <section id="fares" className="scroll-mt-16 bg-white py-20 sm:py-28">
+        <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Official Fare Schedule</p>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Revised Street-Hail Fares</h2>
+            <p className="mt-4 text-lg text-slate-600">Fixed, regulated fares for cross-border taxi transfers between Ban San Street Terminal (Singapore) and Larkin Sentral (Johor Bahru).</p>
+          </div>
+
+          <div className="mt-12 overflow-x-auto rounded-3xl border border-slate-200 shadow-sm">
+            <table className="w-full min-w-[680px] text-left text-sm">
+              <thead className="bg-slate-950 text-white">
+                <tr>
+                  <th className="p-4 font-bold">Pickup</th>
+                  <th className="p-4 font-bold">Drop-off</th>
+                  <th className="p-4 font-bold text-center">Standard 4-Seater</th>
+                  <th className="p-4 font-bold text-center">Standard 6-Seater</th>
+                  <th className="p-4 font-bold text-center">Premium 6-Seater</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                {FARE_ROWS.map((row, idx) => (
+                  <tr key={idx} className={row.shade ? 'bg-slate-50' : 'bg-white'}>
+                    {row.pickup && (
+                      <td rowSpan={row.pickupSpan} className="p-4 align-top font-semibold text-slate-900 border-r border-slate-100 break-words">
+                        {row.pickup}
+                      </td>
+                    )}
+                    <td className="p-4 text-slate-600 whitespace-nowrap">{row.dropoff}</td>
+                    <td className={`p-4 text-center whitespace-nowrap ${row.shade ? 'font-semibold text-slate-700' : 'font-bold text-emerald-700'}`}>{row.standard4}</td>
+                    <td className={`p-4 text-center whitespace-nowrap ${row.shade ? 'font-semibold text-slate-700' : 'font-bold text-emerald-700'}`}>{row.standard6}</td>
+                    <td className={`p-4 text-center whitespace-nowrap ${row.shade ? 'font-semibold text-slate-700' : 'font-bold text-emerald-700'}`}>{row.premium6}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs text-slate-500">Rates shown are per taxi (not per passenger). Fares for areas beyond 35km are the base fare plus the additional amount shown.</p>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2">
+            <div className="rounded-3xl bg-slate-50 border border-slate-200 p-6">
+              <h3 className="font-display text-lg font-bold text-slate-900">Standard 6-Seater Models</h3>
+              <p className="mt-1 text-xs text-slate-500">Non-exhaustive list</p>
+              <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-slate-600">
+                {STANDARD_6_MODELS.map((model) => (
+                  <li key={model} className="flex items-center gap-2 min-w-0">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                    <span className="break-words">{model}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-3xl bg-slate-50 border border-slate-200 p-6">
+              <h3 className="font-display text-lg font-bold text-slate-900">Premium 6-Seater Models</h3>
+              <p className="mt-1 text-xs text-slate-500">Non-exhaustive list</p>
+              <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-slate-600">
+                {PREMIUM_6_MODELS.map((model) => (
+                  <li key={model} className="flex items-center gap-2 min-w-0">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                    <span className="break-words">{model}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -291,7 +490,7 @@ const HomePage = () => {
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Top Tourist Destinations</h2>
               <p className="mt-3 text-slate-600 text-lg max-w-xl">We provide direct door-to-door taxi transfers from Johor to Singapore and popular attractions.</p>
             </div>
-            
+
             {/* Tab Selector */}
             <div className="grid grid-cols-2 w-full md:w-auto items-center gap-1 sm:gap-2 rounded-2xl bg-slate-100 p-1.5 ring-1 ring-slate-200/80">
               <button
@@ -310,7 +509,7 @@ const HomePage = () => {
           </div>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {DESTINATIONS[activeTab].map((dest) => (
+            {(destinationsData[activeTab] || []).map((dest) => (
               <motion.div
                 key={dest.id || dest.name}
                 initial={{ opacity: 0, y: 20 }}
@@ -324,13 +523,13 @@ const HomePage = () => {
                     alt={dest.name}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur">{dest.tag}</span>
+                  <span className="absolute left-4 top-4 max-w-[calc(100%-2rem)] break-words rounded-full bg-slate-950/80 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur">{dest.tag}</span>
                 </div>
                 <div className="flex flex-1 flex-col justify-between p-6">
                   <div>
-                    <h3 className="font-display text-xl font-bold text-slate-900">{dest.name}</h3>
-                    <p className="mt-2 text-sm font-medium text-slate-500 flex items-center gap-1.5">
-                      <MapPin className="h-4 w-4 text-emerald-600 shrink-0" /> {dest.location}
+                    <h3 className="font-display text-xl font-bold text-slate-900 break-words">{dest.name}</h3>
+                    <p className="mt-2 text-sm font-medium text-slate-500 flex items-center gap-1.5 min-w-0">
+                      <MapPin className="h-4 w-4 text-emerald-600 shrink-0" /> <span className="break-words">{dest.location}</span>
                     </p>
                   </div>
                   <button
@@ -347,7 +546,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 6. Why Johor ⟶ Singapore Travellers Choose Us (Accurate & Professional Feature Grid) */}
+      {/* 6. Why Johor ⟷ Singapore Travellers Choose Us (Accurate & Professional Feature Grid) */}
       <section id="why-us" className="scroll-mt-16 bg-slate-50 py-24 sm:py-32">
         <div className="mx-auto max-w-[85rem] px-5 sm:px-8">
           <div className="text-center max-w-3xl mx-auto">
@@ -461,7 +660,7 @@ const HomePage = () => {
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Got Questions?</p>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Frequently Asked Questions</h2>
-            <p className="mt-3 text-slate-600 text-lg">Everything you need to know about Johor ⟶ Singapore cross-border taxi rides.</p>
+            <p className="mt-3 text-slate-600 text-lg">Everything you need to know about Johor ⟷ Singapore cross-border taxi rides.</p>
           </div>
 
           <div className="mt-12 divide-y divide-slate-200 border-y border-slate-200">
@@ -502,30 +701,170 @@ const HomePage = () => {
             </div>
             <div>
               <p className="font-display text-2xl font-extrabold text-white leading-none">Taxi Johor Cross Border</p>
-              <p className="mt-2 max-w-sm text-sm leading-relaxed">Johor ⟶ Singapore cross-border taxi service. Connect directly with taxi drivers 24 hours a day.</p>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed">Johor ⟷ Singapore cross-border taxi service. Connect directly with taxi drivers 24 hours a day.</p>
               <p className="mt-3 text-[11px] text-slate-500 max-w-md leading-relaxed">
-                *Disclaimer: Taxi Johor Cross Border operates as an online booking directory and dispatch service connecting passengers directly with licensed Singapore (LTA) &amp; Malaysia (APAD) cross-border transport operators.
+                *Disclaimer: Taxi Johor Cross Border operates as an online booking directory and dispatch service connecting passengers directly with licensed Singapore (LTA) & Malaysia (APAD) cross-border transport operators.
               </p>
             </div>
           </div>
           <div className="text-sm">
-            <p className="font-semibold text-white">Johor ⟶ Singapore Taxi Dispatch</p>
+            <p className="font-semibold text-white">Johor ⟷ Singapore Taxi Dispatch</p>
             <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+60 12-794 2974</a>
             <p className="mt-4 text-xs text-slate-500">© {new Date().getFullYear()} Taxi Johor Cross Border. All rights reserved.</p>
           </div>
         </div>
       </footer>
+
       {/* 10. Sticky Floating WhatsApp Button */}
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Johor ⟶ Singapore cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Johor ⟷ Singapore cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Ask a Question on WhatsApp"
-        className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-3 rounded-full bg-emerald-500 px-4 sm:px-5 py-3 sm:py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-slate-950/20 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
+        className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 sm:gap-3 rounded-full bg-emerald-500 px-4 sm:px-5 py-3 sm:py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-slate-950/20 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
       >
         <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-slate-950" />
         <span className="text-xs sm:text-sm font-extrabold">Ask a Question</span>
       </a>
+
+      {/* Car Details & Credibility Photos Modal */}
+      <AnimatePresence>
+        {selectedCarForDetails && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-slate-900/10 max-h-[90vh] flex flex-col"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4 bg-slate-50/80">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/20">
+                    <Car className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-xl font-extrabold text-slate-900 break-words">{selectedCarForDetails.name}</h3>
+                    <p className="text-xs text-slate-500 font-medium">Licensed Johor ⟷ Singapore Cross-Border Taxi</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setSelectedCarForDetails(null)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-200 text-slate-600 hover:bg-slate-300 hover:text-slate-900 transition shrink-0"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="overflow-y-auto p-6 space-y-6 flex-1">
+                {/* Main Active Photo */}
+                <div className="relative overflow-hidden rounded-2xl bg-slate-950 aspect-video shadow-inner">
+                  <img
+                    src={activeModalPhoto || (typeof selectedCarForDetails.image === 'string' ? selectedCarForDetails.image : (selectedCarForDetails.image?.default || selectedCarForDetails.image))}
+                    alt={selectedCarForDetails.name}
+                    className="h-full w-full object-cover transition-all duration-300"
+                    style={
+                      !activeModalPhoto || activeModalPhoto === (typeof selectedCarForDetails.image === 'string' ? selectedCarForDetails.image : (selectedCarForDetails.image?.default || selectedCarForDetails.image))
+                        ? { objectPosition: `${selectedCarForDetails.imagePositionX ?? 50}% ${selectedCarForDetails.imagePositionY ?? 50}%` }
+                        : undefined
+                    }
+                  />
+                </div>
+
+                {/* Photo Gallery Thumbnails (Primary Image + Credibility Photos) */}
+                {(() => {
+                  const primaryImg = typeof selectedCarForDetails.image === 'string' ? selectedCarForDetails.image : (selectedCarForDetails.image?.default || selectedCarForDetails.image);
+                  const allPhotos = Array.from(new Set([primaryImg, ...(selectedCarForDetails.galleryUrls || [])]));
+
+                  if (allPhotos.length <= 1) return null;
+
+                  return (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+                        <Camera className="h-3.5 w-3.5 text-emerald-600" /> Additional Vehicle &amp; Customer Credibility Photos ({allPhotos.length})
+                      </h4>
+                      <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin">
+                        {allPhotos.map((url, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => setActiveModalPhoto(url)}
+                            className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border-2 transition ${
+                              activeModalPhoto === url ? 'border-emerald-600 ring-2 ring-emerald-600/30 scale-105' : 'border-slate-200 opacity-70 hover:opacity-100'
+                            }`}
+                          >
+                            <img src={url} alt={`Gallery ${idx + 1}`} className="h-full w-full object-cover" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                {/* Specs Badges & Details */}
+                <div className="grid gap-4 sm:grid-cols-2 bg-slate-50 border border-slate-200/80 rounded-2xl p-4">
+                  <div className="space-y-2 text-xs">
+                    {selectedCarForDetails.driverName && (
+                      <div className="flex items-center gap-2 font-bold text-slate-800 min-w-0">
+                        <User className="h-4 w-4 text-emerald-600 shrink-0" />
+                        <span className="break-words">Driver: {selectedCarForDetails.driverName}</span>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2 text-slate-600 min-w-0">
+                      <Users className="h-4 w-4 text-emerald-600 shrink-0" />
+                      <span className="break-words">Capacity: {selectedCarForDetails.seats}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-600 min-w-0">
+                      <Briefcase className="h-4 w-4 text-emerald-600 shrink-0" />
+                      <span className="break-words">Luggage: {selectedCarForDetails.luggage}</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <ShieldCheck className="h-4 w-4 text-emerald-600" />
+                      <span>100% Door-to-Door Service</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <Clock className="h-4 w-4 text-emerald-600" />
+                      <span>Zero alighting at immigration</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                {selectedCarForDetails.description && (
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Vehicle &amp; Service Notes</h4>
+                    <p className="text-sm leading-relaxed text-slate-600 bg-slate-50 border border-slate-200/60 p-3.5 rounded-xl break-words whitespace-pre-line">
+                      {selectedCarForDetails.description}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Footer CTA */}
+              <div className="border-t border-slate-100 p-4 bg-slate-50/80 flex items-center justify-between gap-4">
+                <div className="hidden sm:block min-w-0">
+                  <span className="text-xs text-slate-500 font-medium block">Ready to travel?</span>
+                  <span className="text-sm font-bold text-slate-900 break-words">Chat with the driver on WhatsApp</span>
+                </div>
+                <button
+                  onClick={() => {
+                    openDriverWhatsApp(selectedCarForDetails);
+                    setSelectedCarForDetails(null);
+                  }}
+                  className="flex flex-1 sm:flex-initial items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-700 active:scale-95"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  <span>Book via WhatsApp Now</span>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
