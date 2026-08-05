@@ -129,7 +129,7 @@ const DriverDashboard = () => {
       }
     } catch (err) {
       console.error('Image upload failed:', err);
-      toast.error('Image upload failed. Please try again.');
+      toast.error(err.message || 'Image upload failed. Please try again.');
     } finally {
       setUploadingImage(false);
     }
@@ -198,7 +198,7 @@ const DriverDashboard = () => {
       }
     } catch (err) {
       console.error('Gallery upload failed:', err);
-      toast.error('Gallery photo upload failed. Please try again.');
+      toast.error(err.message || 'Gallery photo upload failed. Please try again.');
     } finally {
       setUploadingGallery(false);
     }

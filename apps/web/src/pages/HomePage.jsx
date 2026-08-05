@@ -136,7 +136,7 @@ const HomePage = () => {
       </Helmet>
 
       {/* 1. Header Navigation */}
-      <header className="absolute inset-x-0 top-0 z-30">
+      <header className="fixed inset-x-0 top-0 z-30 bg-slate-950/90 backdrop-blur-xl border-b border-white/5">
         <div className="mx-auto flex max-w-[90rem] items-center justify-between px-4 py-4 sm:px-8">
           <div className="flex items-center gap-3 sm:gap-4 text-white">
             <div className="flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-slate-900 border-2 border-slate-700 p-1 shadow-2xl ring-2 ring-emerald-400">
@@ -252,7 +252,7 @@ const HomePage = () => {
       </section>
 
       {/* 3. Our Services Section (Matching Dark Professional Design) */}
-      <section id="services" className="bg-slate-950 py-24 text-white scroll-mt-12">
+      <section id="services" className="bg-slate-950 py-24 text-white scroll-mt-28">
         <div className="mx-auto max-w-[85rem] px-5 sm:px-8">
           <div className="text-center">
             <p className="text-xs font-bold tracking-[0.3em] uppercase text-emerald-400">Professional Taxi Service</p>
@@ -297,7 +297,7 @@ const HomePage = () => {
       </section>
 
       {/* 4. Fleet Section */}
-      <section id="fleet" className="scroll-mt-16 bg-slate-50 py-20 sm:py-28">
+      <section id="fleet" className="scroll-mt-28 bg-slate-50 py-20 sm:py-28">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div className="max-w-2xl">
@@ -414,7 +414,7 @@ const HomePage = () => {
       </section>
 
       {/* 4b. Official Fare Table (Annex C - Revised Street-Hail Fares) */}
-      <section id="fares" className="scroll-mt-16 bg-white py-20 sm:py-28">
+      <section id="fares" className="scroll-mt-28 bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Official Fare Schedule</p>
@@ -482,7 +482,7 @@ const HomePage = () => {
       </section>
 
       {/* 5. Popular Tourist Destinations */}
-      <section id="destinations" className="scroll-mt-16 bg-white py-20 sm:py-28">
+      <section id="destinations" className="scroll-mt-28 bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
@@ -547,7 +547,7 @@ const HomePage = () => {
       </section>
 
       {/* 6. Why Johor ⟷ Singapore Travellers Choose Us (Accurate & Professional Feature Grid) */}
-      <section id="why-us" className="scroll-mt-16 bg-slate-50 py-24 sm:py-32">
+      <section id="why-us" className="scroll-mt-28 bg-slate-50 py-24 sm:py-32">
         <div className="mx-auto max-w-[85rem] px-5 sm:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-800 ring-1 ring-emerald-300">
@@ -655,7 +655,7 @@ const HomePage = () => {
       </section>
 
       {/* 8. FAQ Section (Accordion) */}
-      <section id="faq" className="scroll-mt-16 bg-white py-20 sm:py-28">
+      <section id="faq" className="scroll-mt-28 bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-[50rem] px-5 sm:px-8">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Got Questions?</p>

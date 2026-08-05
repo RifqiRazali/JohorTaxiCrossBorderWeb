@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { ShieldCheck, LogOut, UserPlus, Car, Eye, EyeOff, RefreshCw, Key, Mail, User, Phone, Upload, Copy, Image, Clock, Trash2, RotateCw, AlertTriangle, Search, X } from 'lucide-react';
+import { ShieldCheck, LogOut, UserPlus, Car, Eye, EyeOff, RefreshCw, Key, KeyRound, Mail, User, Phone, Upload, Copy, Image, Clock, Trash2, RotateCw, AlertTriangle, Search, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '../context/AuthContext';
 import { fleetService } from '../services/fleetService';
 import { authService } from '../services/authService';
 import { storageService } from '../services/storageService';
-import { getValidationMessage, provisionDriverSchema } from '../lib/zodSchemas';
+import { getValidationMessage, provisionDriverSchema, changePasswordSchema } from '../lib/zodSchemas';
 import { calculateRenewalTimer } from '../lib/utils';
 import logoImg from '../assets/logo.png';
 
@@ -46,13 +46,17 @@ const buildPasswordResetMessage = ({ password }) => {
 };
 
 const AdminDashboard = () => {
-  const { profile, logout } = useAuth();
+  const { user, profile, logout } = useAuth();
 
   const [fleets, setFleets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('fleets'); // 'fleets' | 'provision'
   const [now, setNow] = useState(() => new Date());
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Change Password State
+  const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [changingPassword, setChangingPassword] = useState(false);
 
   // Provisioning Form State
   const [provisionForm, setProvisionForm] = useState(DEFAULT_PROVISION_FORM);
@@ -187,6 +191,32 @@ const AdminDashboard = () => {
       toast.error(err.message || 'Failed to delete driver account.');
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const handlePasswordFieldChange = (field, value) => {
+    setPasswordForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+
+    const validation = changePasswordSchema.safeParse(passwordForm);
+    if (!validation.success) {
+      toast.error(getValidationMessage(validation));
+      return;
+    }
+
+    setChangingPassword(true);
+    try {
+      await authService.updatePassword(user.email, passwordForm.currentPassword, passwordForm.newPassword);
+      toast.success('Password updated successfully!');
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    } catch (err) {
+      console.error('Error changing password:', err);
+      toast.error(err.message || 'Failed to update password.');
+    } finally {
+      setChangingPassword(false);
     }
   };
 
@@ -739,6 +769,73 @@ const AdminDashboard = () => {
             </form>
           </div>
         )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-8 mx-auto max-w-4xl rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl sm:p-8"
+        >
+          <div className="border-b border-slate-800 pb-5">
+            <h2 className="font-display text-xl font-extrabold text-white flex items-center gap-2">
+              <KeyRound className="h-5 w-5 text-emerald-400" /> Change Password
+            </h2>
+            <p className="mt-1 text-xs text-slate-400">
+              Update your own login password. Your current password is required to confirm.
+            </p>
+          </div>
+
+          <form onSubmit={handlePasswordSubmit} className="mt-6 grid gap-4 sm:grid-cols-3">
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                Current Password
+              </label>
+              <input
+                type="password"
+                value={passwordForm.currentPassword}
+                onChange={(e) => handlePasswordFieldChange('currentPassword', e.target.value)}
+                placeholder="••••••••"
+                required
+                className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                New Password
+              </label>
+              <input
+                type="password"
+                value={passwordForm.newPassword}
+                onChange={(e) => handlePasswordFieldChange('newPassword', e.target.value)}
+                placeholder="At least 6 characters"
+                required
+                className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                Confirm New Password
+              </label>
+              <input
+                type="password"
+                value={passwordForm.confirmPassword}
+                onChange={(e) => handlePasswordFieldChange('confirmPassword', e.target.value)}
+                placeholder="Repeat new password"
+                required
+                className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+              />
+            </div>
+            <div className="sm:col-span-3 flex justify-end">
+              <button
+                type="submit"
+                disabled={changingPassword}
+                className="inline-flex items-center gap-2 rounded-xl bg-slate-800 border border-slate-700 px-6 py-3 text-sm font-bold text-white transition hover:bg-emerald-600 hover:border-emerald-600 active:scale-95 disabled:opacity-50"
+              >
+                <KeyRound className="h-4 w-4" />
+                <span>{changingPassword ? 'Updating...' : 'Update Password'}</span>
+              </button>
+            </div>
+          </form>
+        </motion.div>
       </main>
 
       {/* Delete Confirmation Modal */}

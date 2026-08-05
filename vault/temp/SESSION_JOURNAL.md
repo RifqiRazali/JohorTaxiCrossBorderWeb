@@ -5717,3 +5717,432 @@ s, rates, driver info, and vehicle picture.Vehicle ImageUpload New Photo (Supaba
 ## 2026-08-04 23:13:03.561Z click
 - element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Provision Driver Account"}
 
+## 2026-08-04 23:35:53.324Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-04 23:35:53.538Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-04 23:36:03.272Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-04 23:36:03.395Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-04 23:36:26.732Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"admin@taxijohor.com","valueLength":19,"text":""}
+
+## 2026-08-04 23:36:35.353Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":null,"placeholder":"••••••••","label":"••••••••","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-04 23:36:51.312Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-04 23:36:51.315Z submit
+- action: http://localhost:3000/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"admin@taxijohor.com","length":19,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=12]","length":12,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-04 23:36:52.055Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-04 23:36:52.205Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-04 23:38:01.953Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign Out"}
+
+## 2026-08-04 23:38:02.142Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-04 23:38:13.171Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-04 23:38:29.105Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"admin@taxijohor.com","valueLength":19,"text":""}
+
+## 2026-08-04 23:38:38.404Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":null,"placeholder":"••••••••","label":"••••••••","value":"[redacted:length=18]","valueLength":18,"text":""}
+
+## 2026-08-04 23:38:47.649Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-04 23:38:47.650Z submit
+- action: http://localhost:3000/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"admin@taxijohor.com","length":19,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=18]","length":18,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-04 23:38:48.192Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-04 23:38:48.343Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-04 23:39:23.812Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign Out"}
+
+## 2026-08-04 23:39:24.055Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-04 23:39:33.055Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-04 23:39:51.336Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"driver@taxijohor.com","valueLength":20,"text":""}
+
+## 2026-08-04 23:40:00.373Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":null,"placeholder":"••••••••","label":"••••••••","value":"[redacted:length=18]","valueLength":18,"text":""}
+
+## 2026-08-04 23:40:08.881Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-04 23:40:08.882Z submit
+- action: http://localhost:3000/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"driver@taxijohor.com","length":20,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=18]","length":18,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-04 23:40:09.580Z navigate
+- url: http://localhost:3000/driver
+- via: replaceState
+
+## 2026-08-04 23:40:09.760Z navigate
+- url: http://localhost:3000/driver
+- via: replaceState
+
+## 2026-08-04 23:40:46.562Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign Out"}
+
+## 2026-08-04 23:40:46.772Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-04 23:46:17.857Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-04 23:46:17.933Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-05 00:02:46.421Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:02:46.501Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-05 00:03:08.893Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"admin@taxijohor.com","valueLength":19,"text":""}
+
+## 2026-08-05 00:03:19.089Z load
+- url: http://localhost:3001/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:03:19.459Z navigate
+- url: http://localhost:3001/
+- via: replaceState
+
+## 2026-08-05 00:03:20.029Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":null,"placeholder":"••••••••","label":"••••••••","value":"[redacted:length=18]","valueLength":18,"text":""}
+
+## 2026-08-05 00:03:29.045Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-05 00:03:29.049Z submit
+- action: http://localhost:3000/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"admin@taxijohor.com","length":19,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=18]","length":18,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-05 00:03:29.541Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-05 00:03:29.681Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-05 00:04:10.115Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Update Password"}
+
+## 2026-08-05 00:04:10.115Z submit
+- action: http://localhost:3000/admin
+- fields: [{"label":"••••••••","type":"password","value":"[redacted:length=18]","length":18,"redacted":true},{"label":"At least 6 characters","type":"password","value":"[redacted:length=19]","length":19,"redacted":true},{"label":"Repeat new password","type":"password","value":"[redacted:length=19]","length":19,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-05 00:04:37.564Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign Out"}
+
+## 2026-08-05 00:04:37.710Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-05 00:04:47.844Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:05:08.677Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"admin@taxijohor.com","valueLength":19,"text":""}
+
+## 2026-08-05 00:05:17.946Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":null,"placeholder":"••••••••","label":"••••••••","value":"[redacted:length=19]","valueLength":19,"text":""}
+
+## 2026-08-05 00:05:27.772Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-05 00:05:27.773Z submit
+- action: http://localhost:3000/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"admin@taxijohor.com","length":19,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=19]","length":19,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-05 00:05:28.452Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-05 00:05:28.618Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-05 00:05:55.598Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Update Password"}
+
+## 2026-08-05 00:05:55.598Z submit
+- action: http://localhost:3000/admin
+- fields: [{"label":"••••••••","type":"password","value":"[redacted:length=19]","length":19,"redacted":true},{"label":"At least 6 characters","type":"password","value":"[redacted:length=18]","length":18,"redacted":true},{"label":"Repeat new password","type":"password","value":"[redacted:length=18]","length":18,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-05 00:06:47.711Z network.error
+- method: GET
+- url: https://veiigiakrhclunafkwgz.supabase.co/rest/v1/buckets?select=*&id=eq.fleet-media
+- status: 404
+- response: {"code":"PGRST205","details":null,"hint":null,"message":"Could not find the table 'public.buckets' in the schema cache"}
+- durationMs: 276
+
+## 2026-08-05 00:06:47.712Z console.error
+- text: Fetch error from https://veiigiakrhclunafkwgz.supabase.co/rest/v1/buckets?select=*&id=eq.fleet-media: {"code":"PGRST205","details":null,"hint":null,"message":"Could not find the table 'public.buckets' in the schema cache"}
+
+## 2026-08-05 00:07:02.252Z network.error
+- method: POST
+- url: https://veiigiakrhclunafkwgz.supabase.co/storage/v1/object/fleet-media/fleets/new-drivers/security-test-1785888422050.txt
+- status: 400
+- requestBody: {"cacheControl":"3600","":{"fileName":"evil.txt","type":"text/plain","size":12}}
+- response: {"statusCode":"415","error":"invalid_mime_type","message":"mime type text/plain is not supported","code":"InvalidMimeType"}
+- durationMs: 200
+
+## 2026-08-05 00:07:02.252Z console.error
+- text: Fetch error from https://veiigiakrhclunafkwgz.supabase.co/storage/v1/object/fleet-media/fleets/new-drivers/security-test-1785888422050.txt: {"statusCode":"415","error":"invalid_mime_type","message":"mime type text/plain is not supported","code":"InvalidMimeType"}
+
+## 2026-08-05 00:07:25.520Z network.error
+- method: POST
+- url: https://veiigiakrhclunafkwgz.supabase.co/storage/v1/object/fleet-media/fleets/new-drivers/security-test-oversized-1785888437475.jpg
+- status: 400
+- requestBody: {"cacheControl":"3600","":{"fileName":"oversized.jpg","type":"image/jpeg","size":6291456}}
+- response: {"statusCode":"413","error":"Payload too large","message":"The object exceeded the maximum allowed size","code":"EntityTooLarge"}
+- durationMs: 8045
+
+## 2026-08-05 00:07:25.520Z console.error
+- text: Fetch error from https://veiigiakrhclunafkwgz.supabase.co/storage/v1/object/fleet-media/fleets/new-drivers/security-test-oversized-1785888437475.jpg: {"statusCode":"413","error":"Payload too large","message":"The object exceeded the maximum allowed size","code":"EntityTooLarge"}
+
+## 2026-08-05 00:07:58.808Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign Out"}
+
+## 2026-08-05 00:07:59.006Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-05 00:10:24.687Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:10:24.862Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-05 00:11:41.883Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:11:52.459Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:13:46.443Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:13:50.976Z load
+- url: http://localhost:3001/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:13:51.115Z navigate
+- url: http://localhost:3001/
+- via: replaceState
+
+## 2026-08-05 00:14:27.713Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:15:19.893Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:15:44.350Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:16:55.910Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"FAQ"}
+
+## 2026-08-05 00:16:56.645Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Fares"}
+
+## 2026-08-05 00:16:57.040Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Available Taxis"}
+
+## 2026-08-05 00:16:57.578Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Services"}
+
+## 2026-08-05 00:16:59.416Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Fares"}
+
+## 2026-08-05 00:17:06.594Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:17:06.749Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-05 00:17:13.254Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Available Taxis"}
+
+## 2026-08-05 00:17:13.867Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Fares"}
+
+## 2026-08-05 00:17:14.695Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Taxi Johor Cross BorderJohor ⟷ Singapore TaxiServicesAvailable TaxisFaresDestinationsWhy UsFAQPortal LoginSelect Johor-SG Taxi"}
+
+## 2026-08-05 00:17:14.993Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Destinations"}
+
+## 2026-08-05 00:17:15.472Z click
+- element: {"tag":"nav","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"ServicesAvailable TaxisFaresDestinationsWhy UsFAQ"}
+
+## 2026-08-05 00:17:15.785Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Why Us"}
+
+## 2026-08-05 00:17:16.118Z click
+- element: {"tag":"nav","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"ServicesAvailable TaxisFaresDestinationsWhy UsFAQ"}
+
+## 2026-08-05 00:17:16.441Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"FAQ"}
+
+## 2026-08-05 00:17:18.336Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Portal Login"}
+
+## 2026-08-05 00:17:18.340Z navigate
+- url: http://localhost:3001/login
+- via: pushState
+
+## 2026-08-05 00:17:19.219Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Demo Test AccountsPassword: Password123!Admin Testadmin@taxijohor.comDriver Testdriver@taxijohor.com"}
+
+## 2026-08-05 00:17:19.665Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Admin Testadmin@taxijohor.com"}
+
+## 2026-08-05 00:17:21.472Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-05 00:17:21.475Z submit
+- action: http://localhost:3001/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"admin@taxijohor.com","length":19,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=12]","length":12,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-05 00:17:21.918Z network.error
+- method: POST
+- url: https://veiigiakrhclunafkwgz.supabase.co/auth/v1/token?grant_type=password
+- status: 400
+- requestBody: {"email":"admin@taxijohor.com","password":"[redacted:length=12]","gotrue_meta_security":{}}
+- response: {"code":"invalid_credentials","message":"Invalid login credentials"}
+- durationMs: 439
+
+## 2026-08-05 00:17:21.918Z console.error
+- text: Fetch error from https://veiigiakrhclunafkwgz.supabase.co/auth/v1/token?grant_type=password: {"code":"invalid_credentials","message":"Invalid login credentials"}
+
+## 2026-08-05 00:17:21.926Z console.error
+- text: 
+    Login error: Error: Demo accounts must be seeded first. Run supabase_schema.sql in your Supabase SQL Editor if admin@taxijohor.com or driver@taxijohor.com cannot sign in. Supabase sign-in returned: Invalid login credentials
+        at Object.login (http://localhost:3001/src/services/authService.js:40:15)
+        at async login (http://localhost:3001/src/context/AuthContext.jsx:78:18)
+        at async handleSubmit (http://localhost:3001/src/pages/LoginPage.jsx:39:20)
+
+## 2026-08-05 00:17:26.272Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Back to Taxi Service"}
+
+## 2026-08-05 00:17:26.273Z navigate
+- url: http://localhost:3001/
+- via: pushState
+
+## 2026-08-05 00:17:28.839Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:18:13.123Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:18:13.125Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:18:28.939Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:22:10.670Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Services"}
+
+## 2026-08-05 00:22:11.055Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Available Taxis"}
+
+## 2026-08-05 00:22:13.827Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Fares"}
+
+## 2026-08-05 00:22:18.799Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Taxi Johor Cross BorderJohor ⟷ Singapore TaxiServicesAvailable TaxisFaresDestinationsWhy UsFAQPortal LoginSelect Johor-SG Taxi"}
+
+## 2026-08-05 00:22:19.101Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Fares"}
+
+## 2026-08-05 00:22:31.437Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:27:49.179Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:29:42.111Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Fares"}
+
+## 2026-08-05 00:30:38.515Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:31:45.711Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:32:16.865Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:35:59.388Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:36:00.096Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Available Taxis"}
+
+## 2026-08-05 00:36:01.058Z click
+- element: {"tag":"button","role":null,"ariaLabel":"Toggle navigation menu","name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-05 00:36:01.774Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Services"}
+

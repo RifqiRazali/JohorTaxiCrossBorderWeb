@@ -476,9 +476,13 @@ $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, extensions;
 
 -- 10. STORAGE BUCKET CONFIGURATION & RLS POLICIES
 -- Create storage bucket 'fleet-media' if it does not exist
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('fleet-media', 'fleet-media', true)
-ON CONFLICT (id) DO NOTHING;
+-- file_size_limit/allowed_mime_types are enforced by Storage itself on every upload,
+-- so this can't be bypassed even by a crafted API call that skips the app's own UI.
+INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+VALUES ('fleet-media', 'fleet-media', true, 5242880, ARRAY['image/jpeg', 'image/png', 'image/webp'])
+ON CONFLICT (id) DO UPDATE SET
+  file_size_limit = EXCLUDED.file_size_limit,
+  allowed_mime_types = EXCLUDED.allowed_mime_types;
 
 -- Intentionally no public SELECT policy on storage.objects for this bucket.
 -- The bucket is created with `public = true`, which already serves individual
