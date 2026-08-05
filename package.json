@@ -14,5 +14,11 @@
 	},
 	"workspaces": [
 		"apps/*"
-	]
+	],
+	"overrides": {
+		"brace-expansion": "^1.1.18",
+		"shell-quote": "^1.9.0",
+		"js-yaml": "^4.3.0",
+		"esbuild": "^0.28.1"
+	}
 }

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Users, Briefcase, ShieldCheck, Clock, BadgeDollarSign, ArrowRight, MapPin, Car, MessageCircle, User, CheckCircle2, ChevronDown, Sparkles, Menu, X, Camera, LogIn } from 'lucide-react';
-import { FLEET, SERVICES, DESTINATIONS, DEFAULT_WHATSAPP_NUMBER as WHATSAPP_NUMBER } from '../data/fleetData';
+import { FLEET, SERVICES, DESTINATIONS, DEFAULT_WHATSAPP_NUMBER as WHATSAPP_NUMBER, SG_JB_WHATSAPP_NUMBER } from '../data/fleetData';
 import { fleetService } from '../services/fleetService';
 import logoImg from '../assets/logo.png';
 
@@ -70,6 +70,7 @@ const HomePage = () => {
   const [fleetDirectionTab, setFleetDirectionTab] = useState('jb-sg');
   const [openFaq, setOpenFaq] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [quickDispatchOpen, setQuickDispatchOpen] = useState(false);
 
   // Dynamic Data State with Fallbacks (keeps admin/driver-published edits live on the site)
   const [fleetsData, setFleetsData] = useState(FLEET);
@@ -708,24 +709,69 @@ const HomePage = () => {
             </div>
           </div>
           <div className="text-sm">
-            <p className="font-semibold text-white">Johor ⟷ Singapore Taxi Dispatch</p>
-            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+60 12-794 2974</a>
+            <p className="font-semibold text-white">Quick Dispatch</p>
+            <div className="mt-2 space-y-2">
+              <div>
+                <span className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500">Johor &rarr; Singapore</span>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+60 12-794 2974</a>
+              </div>
+              <div>
+                <span className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500">Singapore &rarr; Johor</span>
+                <a href={`https://wa.me/${SG_JB_WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="transition hover:text-emerald-400">+65 8755 8066</a>
+              </div>
+            </div>
             <p className="mt-4 text-xs text-slate-500">© {new Date().getFullYear()} Taxi Johor Cross Border. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
-      {/* 10. Sticky Floating WhatsApp Button */}
-      <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Johor ⟷ Singapore cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Ask a Question on WhatsApp"
-        className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 sm:gap-3 rounded-full bg-emerald-500 px-4 sm:px-5 py-3 sm:py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-slate-950/20 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
-      >
-        <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-slate-950" />
-        <span className="text-xs sm:text-sm font-extrabold">Ask a Question</span>
-      </a>
+      {/* 10. Sticky Floating Quick Dispatch Button */}
+      <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3">
+        <AnimatePresence>
+          {quickDispatchOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="w-64 rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden"
+            >
+              <div className="px-4 py-3 border-b border-slate-800">
+                <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">Quick Dispatch</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">Choose your route to chat on WhatsApp</p>
+              </div>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Johor to Singapore cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-2 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-900"
+              >
+                <span>Johor &rarr; Singapore</span>
+                <MessageCircle className="h-4 w-4 text-emerald-400 shrink-0" />
+              </a>
+              <a
+                href={`https://wa.me/${SG_JB_WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello! I have a question regarding Singapore to Johor cross-border taxi services.\n\nPlease help answer my inquiry.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-2 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-900 border-t border-slate-800"
+              >
+                <span>Singapore &rarr; Johor</span>
+                <MessageCircle className="h-4 w-4 text-emerald-400 shrink-0" />
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          type="button"
+          onClick={() => setQuickDispatchOpen((prev) => !prev)}
+          aria-label="Quick Dispatch on WhatsApp"
+          className="flex items-center gap-2 sm:gap-3 rounded-full bg-emerald-500 px-4 sm:px-5 py-3 sm:py-3.5 text-slate-950 font-extrabold shadow-2xl shadow-emerald-500/40 ring-4 ring-slate-950/20 transition duration-300 hover:bg-emerald-400 hover:scale-105 active:scale-95"
+        >
+          <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 fill-slate-950" />
+          <span className="text-xs sm:text-sm font-extrabold">Quick Dispatch</span>
+        </button>
+      </div>
 
       {/* Car Details & Credibility Photos Modal */}
       <AnimatePresence>

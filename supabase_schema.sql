@@ -240,6 +240,7 @@ CREATE TRIGGER on_auth_user_created
 
 DROP FUNCTION IF EXISTS public.admin_create_driver_user(TEXT, TEXT, TEXT, TEXT);
 DROP FUNCTION IF EXISTS public.admin_create_driver_user(TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT);
+DROP FUNCTION IF EXISTS public.admin_create_driver_user(TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT);
 
 -- Allows Admin to create an auto-confirmed driver user account and its first fleet record
 CREATE OR REPLACE FUNCTION public.admin_create_driver_user(
@@ -252,7 +253,8 @@ CREATE OR REPLACE FUNCTION public.admin_create_driver_user(
   car_luggage TEXT,
   car_rate TEXT,
   car_image_url TEXT,
-  car_description TEXT DEFAULT NULL
+  car_description TEXT DEFAULT NULL,
+  car_direction TEXT DEFAULT 'jb-sg'
 )
 RETURNS JSONB AS $$
 DECLARE
@@ -310,11 +312,11 @@ BEGIN
   -- 4. Create and link the driver's first vehicle
   INSERT INTO public.fleets (
     id, driver_id, name, driver_name, rate, seats, luggage,
-    whatsapp_number, image_url, description, is_published, display_order
+    whatsapp_number, image_url, description, direction, is_published, display_order
   )
   VALUES (
     new_fleet_id, new_user_id, car_name, driver_full_name, car_rate, car_seats, car_luggage,
-    driver_phone, car_image_url, car_description, true,
+    driver_phone, car_image_url, car_description, COALESCE(car_direction, 'jb-sg'), true,
     COALESCE((SELECT MAX(display_order) + 1 FROM public.fleets), 1)
   );
 

@@ -89,6 +89,7 @@ export const authService = {
     carRate,
     carImageUrl,
     carDescription,
+    direction,
   }) {
     if (!isSupabaseConfigured || !supabase) {
       throw new Error('The system is not set up correctly. Please contact the site administrator.');
@@ -107,6 +108,7 @@ export const authService = {
       car_rate: formatRateLabel(carRate),
       car_image_url: carImageUrl.trim(),
       car_description: carDescription?.trim() || null,
+      car_direction: direction || 'jb-sg',
     });
 
     if (rpcErr) {
