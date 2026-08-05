@@ -72,9 +72,13 @@ const extractStoragePath = (publicUrl, bucket = 'fleet-media') => {
   return publicUrl.slice(idx + marker.length);
 };
 
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
 export const storageService = {
   /**
-   * Upload an image file to Supabase Storage bucket 'fleet-media' with client-side compression
+   * Upload an image file to Supabase Storage bucket 'fleet-media' with client-side compression.
+   * The bucket itself also enforces file type/size server-side, so this check is just for a
+   * fast, friendly error -- it isn't the actual security boundary.
    * @param {File} file - Image file from file input
    * @param {string} folderPath - Target folder in bucket (e.g. 'fleets/driver-id')
    * @returns {Promise<{ publicUrl: string | null, error: Error | null }>}
@@ -85,6 +89,10 @@ export const storageService = {
         publicUrl: null,
         error: new Error('The system is not set up correctly. Please contact the site administrator.'),
       };
+    }
+
+    if (!file || !ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      return { publicUrl: null, error: new Error('Please upload a JPG, PNG, or WEBP image.') };
     }
 
     try {
