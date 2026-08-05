@@ -6,7 +6,11 @@
  */
 
 // Fallback WhatsApp number for general customer inquiries, booking questions & dispatch
+// Dedicated dispatcher for the Johor -> Singapore route
 export const DEFAULT_WHATSAPP_NUMBER = '60127942974';
+
+// Dedicated dispatcher for the Singapore -> Johor route
+export const SG_JB_WHATSAPP_NUMBER = '6587558066';
 
 // WhatsApp number for the admin who handles driver account creation, renewals & user management
 export const DEFAULT_MANAGEMENT_WHATSAPP_NUMBER = '601137433099';
@@ -179,7 +183,7 @@ export const SERVICES = [
   },
   {
     id: 'outstation',
-    title: 'OUTSTATION TRIP',
+    title: 'TRAVEL ACROSS MALAYSIA',
     desc: 'Long-distance transfers to Desaru, Malacca, Genting Highlands, Mersing Jetty & beyond.',
     image: '/images/fleet/vellfiretaximan.jpeg',
   },

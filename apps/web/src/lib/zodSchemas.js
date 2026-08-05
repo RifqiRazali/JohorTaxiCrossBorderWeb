@@ -43,4 +43,5 @@ export const provisionDriverSchema = z.object({
   carRate: z.string().optional(),
   carImageUrl: z.string().optional(),
   carDescription: z.string().optional(),
+  direction: z.enum(['jb-sg', 'sg-jb'], { errorMap: () => ({ message: 'Please select a route direction' }) }),
 });

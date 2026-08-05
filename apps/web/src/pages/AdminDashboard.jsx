@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { ShieldCheck, LogOut, UserPlus, Car, Eye, EyeOff, RefreshCw, Key, KeyRound, Mail, User, Phone, Upload, Copy, Image, Clock, Trash2, RotateCw, AlertTriangle, Search, X } from 'lucide-react';
+import { ShieldCheck, LogOut, UserPlus, Car, Eye, EyeOff, RefreshCw, Key, KeyRound, Mail, User, Phone, Upload, Copy, Image, Clock, Trash2, RotateCw, AlertTriangle, Search, X, Pencil, Move, RotateCcw, Users, Briefcase } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '../context/AuthContext';
 import { fleetService } from '../services/fleetService';
 import { authService } from '../services/authService';
 import { storageService } from '../services/storageService';
-import { getValidationMessage, provisionDriverSchema, changePasswordSchema } from '../lib/zodSchemas';
-import { calculateRenewalTimer } from '../lib/utils';
+import { getValidationMessage, provisionDriverSchema, changePasswordSchema, fleetEditSchema } from '../lib/zodSchemas';
+import { calculateRenewalTimer, formatCountLabel, extractCount } from '../lib/utils';
 import logoImg from '../assets/logo.png';
 
 const DEFAULT_PROVISION_FORM = {
@@ -22,6 +22,7 @@ const DEFAULT_PROVISION_FORM = {
   carRate: '',
   carImageUrl: '',
   carDescription: '',
+  direction: 'jb-sg',
 };
 
 const createTemporaryPassword = () =>
@@ -53,6 +54,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('fleets'); // 'fleets' | 'provision'
   const [now, setNow] = useState(() => new Date());
   const [searchQuery, setSearchQuery] = useState('');
+  const [directionFilter, setDirectionFilter] = useState('all'); // 'all' | 'jb-sg' | 'sg-jb'
 
   // Change Password State
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
@@ -91,18 +93,145 @@ const AdminDashboard = () => {
 
   const [driverToDelete, setDriverToDelete] = useState(null);
   const [driverToResetPassword, setDriverToResetPassword] = useState(null);
+  const [resetPasswordValue, setResetPasswordValue] = useState('');
   const [resetPasswordResult, setResetPasswordResult] = useState(null);
   const [resetCredentialsCopied, setResetCredentialsCopied] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
 
+  const handleOpenResetPassword = (car) => {
+    setDriverToResetPassword(car);
+    setResetPasswordValue(createTemporaryPassword());
+  };
+
+  // Edit Vehicle Modal State
+  const [editingFleet, setEditingFleet] = useState(null);
+  const [editForm, setEditForm] = useState(null);
+  const [savingEdit, setSavingEdit] = useState(false);
+  const [uploadingEditImage, setUploadingEditImage] = useState(false);
+  const editImageFrameRef = useRef(null);
+
+  const handleOpenEdit = (car) => {
+    setEditingFleet(car);
+    setEditForm({
+      name: car.name || '',
+      driverName: car.driverName || '',
+      rate: car.rate || '',
+      seats: car.seats || '',
+      luggage: car.luggage || '',
+      whatsappNumber: car.whatsappNumber || '',
+      imageUrl: car.image || '',
+      imagePositionX: car.imagePositionX ?? 50,
+      imagePositionY: car.imagePositionY ?? 50,
+      galleryUrls: car.galleryUrls || [],
+      description: car.description || '',
+      direction: car.direction || 'jb-sg',
+      isPublished: car.isPublished,
+    });
+  };
+
+  const handleCloseEdit = () => {
+    setEditingFleet(null);
+    setEditForm(null);
+  };
+
+  const handleEditFieldChange = (field, value) => {
+    setEditForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleEditSeatsChange = (e) => {
+    const count = e.target.value.replace(/\D/g, '');
+    setEditForm((prev) => ({ ...prev, seats: count ? formatCountLabel(count, 'Seater', 'Seater') : '' }));
+  };
+
+  const handleEditLuggageChange = (e) => {
+    const count = e.target.value.replace(/\D/g, '');
+    setEditForm((prev) => ({ ...prev, luggage: count ? formatCountLabel(count, 'large bag', 'large bags') : '' }));
+  };
+
+  const handleEditWhatsAppChange = (e) => {
+    setEditForm((prev) => ({ ...prev, whatsappNumber: e.target.value.replace(/\D/g, '') }));
+  };
+
+  const handleEditImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingEditImage(true);
+    try {
+      const { publicUrl, error } = await storageService.uploadFleetImage(file, `fleets/${editingFleet.driverId || editingFleet.id}`);
+      if (error) throw error;
+
+      if (publicUrl) {
+        setEditForm((prev) => ({ ...prev, imageUrl: publicUrl, imagePositionX: 50, imagePositionY: 50 }));
+        toast.success('Vehicle photo uploaded & compressed successfully!');
+      }
+    } catch (err) {
+      console.error('Image upload failed:', err);
+      toast.error(err.message || 'Image upload failed. Please try again.');
+    } finally {
+      setUploadingEditImage(false);
+    }
+  };
+
+  const updateEditImagePositionFromEvent = (e) => {
+    const frame = editImageFrameRef.current;
+    if (!frame) return;
+    const rect = frame.getBoundingClientRect();
+    const x = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.min(100, Math.max(0, ((e.clientY - rect.top) / rect.height) * 100));
+    setEditForm((prev) => ({ ...prev, imagePositionX: Math.round(x), imagePositionY: Math.round(y) }));
+  };
+
+  const handleEditImagePositionPointerUp = () => {
+    window.removeEventListener('pointermove', updateEditImagePositionFromEvent);
+    window.removeEventListener('pointerup', handleEditImagePositionPointerUp);
+  };
+
+  const handleEditImagePositionPointerDown = (e) => {
+    e.preventDefault();
+    updateEditImagePositionFromEvent(e);
+    window.addEventListener('pointermove', updateEditImagePositionFromEvent);
+    window.addEventListener('pointerup', handleEditImagePositionPointerUp);
+  };
+
+  const handleResetEditImagePosition = () => {
+    setEditForm((prev) => ({ ...prev, imagePositionX: 50, imagePositionY: 50 }));
+  };
+
+  const handleEditSave = async (e) => {
+    e.preventDefault();
+    if (!editingFleet || !editForm) return;
+
+    const validation = fleetEditSchema.safeParse(editForm);
+    if (!validation.success) {
+      toast.error(getValidationMessage(validation));
+      return;
+    }
+
+    setSavingEdit(true);
+    try {
+      await fleetService.updateDriverFleet(editingFleet.id, editForm);
+      setFleets((prev) => prev.map((f) => (f.id === editingFleet.id ? { ...f, ...editForm, image: editForm.imageUrl } : f)));
+      toast.success('Vehicle details updated successfully!');
+      handleCloseEdit();
+    } catch (err) {
+      console.error('Error updating vehicle:', err);
+      toast.error(err.message || 'Failed to update vehicle details.');
+    } finally {
+      setSavingEdit(false);
+    }
+  };
+
   const filteredFleets = (() => {
     const query = searchQuery.trim().toLowerCase();
-    if (!query) return fleets;
-    return fleets.filter((car) =>
-      [car.name, car.driverName, car.assignedDriverName, car.id]
-        .filter(Boolean)
-        .some((field) => field.toLowerCase().includes(query))
-    );
+    return fleets
+      .filter((car) => directionFilter === 'all' || (car.direction || 'jb-sg') === directionFilter)
+      .filter((car) =>
+        !query ||
+        [car.name, car.driverName, car.assignedDriverName, car.id]
+          .filter(Boolean)
+          .some((field) => field.toLowerCase().includes(query))
+      );
   })();
 
   const handleTogglePublish = async (fleetId, currentStatus) => {
@@ -142,9 +271,14 @@ const AdminDashboard = () => {
   const handleResetPasswordConfirm = async () => {
     if (!driverToResetPassword) return;
 
+    if (resetPasswordValue.trim().length < 6) {
+      toast.error('Password must be at least 6 characters.');
+      return;
+    }
+
     try {
       setActionLoading(true);
-      const newPassword = createTemporaryPassword();
+      const newPassword = resetPasswordValue.trim();
       await authService.adminResetDriverPassword(driverToResetPassword.driverId, newPassword);
       setResetPasswordResult({
         driverName: driverToResetPassword.driverName || driverToResetPassword.assignedDriverName || 'Driver',
@@ -421,14 +555,46 @@ const AdminDashboard = () => {
               </div>
             </div>
 
+            <div className="px-6 pt-4 pb-2 border-b border-slate-800 flex items-center gap-2">
+              {[
+                { value: 'all', label: 'All Routes' },
+                { value: 'jb-sg', label: 'Johor → Singapore' },
+                { value: 'sg-jb', label: 'Singapore → Johor' },
+              ].map((opt) => (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => setDirectionFilter(opt.value)}
+                  className={`rounded-xl px-3.5 py-2 text-xs font-bold transition ${
+                    directionFilter === opt.value
+                      ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                      : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
             {loading ? (
               <div className="p-12 text-center text-slate-500 text-sm">Loading fleet items...</div>
             ) : filteredFleets.length === 0 ? (
               <div className="p-12 text-center text-slate-500 text-sm">
-                No vehicles match &quot;{searchQuery}&quot;.{' '}
-                <button type="button" onClick={() => setSearchQuery('')} className="text-emerald-400 hover:underline font-semibold">
-                  Clear search
-                </button>
+                {searchQuery ? (
+                  <>
+                    No vehicles match &quot;{searchQuery}&quot;.{' '}
+                    <button type="button" onClick={() => setSearchQuery('')} className="text-emerald-400 hover:underline font-semibold">
+                      Clear search
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    No vehicles on this route yet.{' '}
+                    <button type="button" onClick={() => setDirectionFilter('all')} className="text-emerald-400 hover:underline font-semibold">
+                      Show all routes
+                    </button>
+                  </>
+                )}
               </div>
             ) : (
               <div className="overflow-x-auto">
@@ -436,6 +602,7 @@ const AdminDashboard = () => {
                   <thead className="bg-slate-950/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
                     <tr>
                       <th className="p-4">Vehicle</th>
+                      <th className="p-4">Route</th>
                       <th className="p-4">Driver Name</th>
                       <th className="p-4">Annual Renewal (1-Yr Timer)</th>
                       <th className="p-4">Fare &amp; Specs</th>
@@ -454,6 +621,15 @@ const AdminDashboard = () => {
                               <span className="font-bold text-white text-sm block break-words">{car.name}</span>
                               <span className="text-[11px] font-mono text-slate-500 block truncate" title={car.id}>{car.id}</span>
                             </div>
+                          </td>
+                          <td className="p-4">
+                            <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold whitespace-nowrap ${
+                              (car.direction || 'jb-sg') === 'sg-jb'
+                                ? 'bg-sky-500/15 text-sky-300 border border-sky-500/25'
+                                : 'bg-violet-500/15 text-violet-300 border border-violet-500/25'
+                            }`}>
+                              {(car.direction || 'jb-sg') === 'sg-jb' ? 'SG → JB' : 'JB → SG'}
+                            </span>
                           </td>
                           <td className="p-4 font-medium text-slate-200">
                             <div className="break-words">{car.driverName || 'Unassigned'}</div>
@@ -520,6 +696,14 @@ const AdminDashboard = () => {
                           <td className="p-4 text-right">
                             <div className="flex items-center justify-end gap-2">
                               <button
+                                onClick={() => handleOpenEdit(car)}
+                                className="rounded-lg bg-slate-800 border border-slate-700 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-700 active:scale-95 flex items-center gap-1"
+                                title="Edit Vehicle Details"
+                              >
+                                <Pencil className="h-3.5 w-3.5" />
+                                <span>Edit</span>
+                              </button>
+                              <button
                                 onClick={() => handleTogglePublish(car.id, car.isPublished)}
                                 className="rounded-lg bg-slate-800 border border-slate-700 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-700 active:scale-95"
                               >
@@ -527,7 +711,7 @@ const AdminDashboard = () => {
                               </button>
                               {car.driverId && (
                                 <button
-                                  onClick={() => setDriverToResetPassword(car)}
+                                  onClick={() => handleOpenResetPassword(car)}
                                   className="rounded-lg bg-slate-800 border border-slate-700 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-700 active:scale-95 flex items-center gap-1"
                                   title="Reset Driver Password"
                                 >
@@ -731,6 +915,21 @@ const AdminDashboard = () => {
                       <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">large bags</span>
                     </div>
                   </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                      Route Direction
+                    </label>
+                    <select
+                      value={provisionForm.direction}
+                      onChange={(e) => handleProvisionChange('direction', e.target.value)}
+                      required
+                      className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    >
+                      <option value="jb-sg">Johor &rarr; Singapore</option>
+                      <option value="sg-jb">Singapore &rarr; Johor</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="mt-4">
@@ -875,6 +1074,210 @@ const AdminDashboard = () => {
         </div>
       )}
 
+      {/* Edit Vehicle Modal */}
+      {editingFleet && editForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm overflow-y-auto py-8">
+          <div className="w-full max-w-2xl rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4 shrink-0">
+              <h3 className="font-display text-xl font-extrabold text-white flex items-center gap-2">
+                <Pencil className="h-5 w-5 text-emerald-400" /> Edit Vehicle Details
+              </h3>
+              <button
+                onClick={handleCloseEdit}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white transition"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleEditSave} className="overflow-y-auto p-6 space-y-5">
+              <div>
+                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                  Vehicle Image
+                </label>
+                <div className="flex flex-col sm:flex-row gap-4 items-start">
+                  <div className="w-full sm:max-w-xs">
+                    <div
+                      ref={editImageFrameRef}
+                      onPointerDown={handleEditImagePositionPointerDown}
+                      className="relative w-full aspect-[16/10] overflow-hidden rounded-xl border border-slate-800 bg-slate-950 cursor-crosshair touch-none select-none"
+                    >
+                      <img
+                        src={editForm.imageUrl || '/images/fleet/vellfiretaxi.jpeg'}
+                        alt="Position preview"
+                        draggable={false}
+                        className="h-full w-full object-cover pointer-events-none"
+                        style={{ objectPosition: `${editForm.imagePositionX}% ${editForm.imagePositionY}%` }}
+                      />
+                      <div
+                        className="pointer-events-none absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-500/80 shadow-lg"
+                        style={{ left: `${editForm.imagePositionX}%`, top: `${editForm.imagePositionY}%` }}
+                      />
+                    </div>
+                    <p className="mt-2 text-[11px] text-slate-500 flex items-start gap-1.5">
+                      <Move className="h-3 w-3 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Click or drag inside the photo to position it.</span>
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 w-full sm:w-48 shrink-0">
+                    <label className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl bg-slate-800 border border-slate-700 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-slate-700 active:scale-95">
+                      <Upload className="h-4 w-4 text-emerald-400" />
+                      <span>{uploadingEditImage ? 'Uploading...' : 'Upload New Photo'}</span>
+                      <input type="file" accept="image/*" onChange={handleEditImageUpload} disabled={uploadingEditImage} className="hidden" />
+                    </label>
+                    <button
+                      type="button"
+                      onClick={handleResetEditImagePosition}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 border border-slate-800 px-4 py-2.5 text-xs font-bold text-slate-300 transition hover:bg-slate-800"
+                    >
+                      <RotateCcw className="h-3.5 w-3.5" />
+                      <span>Reset to Center</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    Vehicle Model / Name
+                  </label>
+                  <input
+                    type="text"
+                    value={editForm.name}
+                    onChange={(e) => handleEditFieldChange('name', e.target.value)}
+                    required
+                    className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    Driver Display Name
+                  </label>
+                  <input
+                    type="text"
+                    value={editForm.driverName}
+                    onChange={(e) => handleEditFieldChange('driverName', e.target.value)}
+                    required
+                    className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    Route Direction
+                  </label>
+                  <select
+                    value={editForm.direction}
+                    onChange={(e) => handleEditFieldChange('direction', e.target.value)}
+                    required
+                    className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                  >
+                    <option value="jb-sg">Johor &rarr; Singapore</option>
+                    <option value="sg-jb">Singapore &rarr; Johor</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    WhatsApp Number
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-500" />
+                    <input
+                      type="tel"
+                      value={editForm.whatsappNumber}
+                      onChange={handleEditWhatsAppChange}
+                      required
+                      className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 pl-10 pr-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    Passenger Capacity
+                  </label>
+                  <div className="relative">
+                    <Users className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-500" />
+                    <input
+                      type="number"
+                      min="0"
+                      value={extractCount(editForm.seats)}
+                      onChange={handleEditSeatsChange}
+                      required
+                      className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 pl-10 pr-24 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    />
+                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">Seater</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    Luggage Capacity
+                  </label>
+                  <div className="relative">
+                    <Briefcase className="absolute left-3.5 top-3.5 h-4 w-4 text-slate-500" />
+                    <input
+                      type="number"
+                      min="0"
+                      value={extractCount(editForm.luggage)}
+                      onChange={handleEditLuggageChange}
+                      required
+                      className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 pl-10 pr-24 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    />
+                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500">large bags</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                    Rate (Internal — not shown publicly)
+                  </label>
+                  <input
+                    type="text"
+                    value={editForm.rate}
+                    onChange={(e) => handleEditFieldChange('rate', e.target.value)}
+                    placeholder="e.g. SGD 120 per trip"
+                    className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                  Vehicle &amp; Service Description (Optional)
+                </label>
+                <textarea
+                  rows={3}
+                  value={editForm.description}
+                  onChange={(e) => handleEditFieldChange('description', e.target.value)}
+                  className="w-full rounded-xl bg-slate-950 border border-slate-800 p-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                />
+              </div>
+
+              <div className="border-t border-slate-800 pt-5 flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={handleCloseEdit}
+                  className="rounded-xl bg-slate-800 border border-slate-700 px-5 py-2.5 text-xs font-bold text-slate-300 hover:bg-slate-700 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={savingEdit}
+                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-2.5 text-xs font-bold text-slate-950 transition hover:bg-emerald-400 active:scale-95 disabled:opacity-50 shadow-lg shadow-emerald-500/20"
+                >
+                  <Pencil className="h-3.5 w-3.5" />
+                  <span>{savingEdit ? 'Saving...' : 'Save Changes'}</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Reset Password Confirmation Modal */}
       {driverToResetPassword && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm">
@@ -884,8 +1287,31 @@ const AdminDashboard = () => {
             </div>
             <h3 className="font-display text-xl font-bold text-white">Reset Driver Password?</h3>
             <p className="mt-2 text-xs text-slate-300 leading-relaxed break-words">
-              This will generate a new temporary password for <strong className="text-white">{driverToResetPassword.driverName || driverToResetPassword.assignedDriverName || 'Driver'}</strong>, replacing their current password immediately.
+              Set a new password for <strong className="text-white">{driverToResetPassword.driverName || driverToResetPassword.assignedDriverName || 'Driver'}</strong>, replacing their current password immediately.
             </p>
+
+            <div className="mt-4">
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                New Password
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={resetPasswordValue}
+                  onChange={(e) => setResetPasswordValue(e.target.value)}
+                  placeholder="TJ-ABCD-1234"
+                  className="w-full rounded-xl bg-slate-950 border border-slate-800 py-2.5 px-4 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={() => setResetPasswordValue(createTemporaryPassword())}
+                  className="shrink-0 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs font-bold text-white transition hover:bg-slate-700"
+                >
+                  Generate
+                </button>
+              </div>
+              <p className="mt-1 text-[10px] text-slate-500">At least 6 characters. Type your own or click Generate for a random one.</p>
+            </div>
 
             <div className="mt-6 flex items-center justify-end gap-3">
               <button
