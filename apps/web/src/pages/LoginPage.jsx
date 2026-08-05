@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { ShieldCheck, LogIn, ArrowLeft, Lock, Mail, AlertCircle } from 'lucide-react';
+import { LogIn, ArrowLeft, Lock, Mail, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getValidationMessage, loginSchema } from '../lib/zodSchemas';
 import { isSupabaseConfigured, REMEMBER_ME_KEY } from '../lib/supabaseClient';
@@ -231,15 +231,6 @@ const LoginPage = () => {
               )}
             </button>
           </form>
-
-          <div className="mt-8 border-t border-slate-800/80 pt-6 text-center text-xs text-slate-400">
-            <p className="flex items-center justify-center gap-1.5 font-medium text-slate-300">
-              <ShieldCheck className="h-4 w-4 text-emerald-400" /> Protected RBAC Portal
-            </p>
-            <p className="mt-1 text-[11px] leading-relaxed text-slate-500">
-              Self-registration is disabled. Driver accounts are issued directly by the system Admin.
-            </p>
-          </div>
         </motion.div>
       </main>
 

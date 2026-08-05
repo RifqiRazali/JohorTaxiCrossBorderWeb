@@ -6146,3 +6146,89 @@ s, rates, driver info, and vehicle picture.Vehicle ImageUpload New Photo (Supaba
 ## 2026-08-05 00:36:01.774Z click
 - element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Services"}
 
+## 2026-08-05 00:44:14.310Z load
+- url: http://localhost:3000/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 00:44:14.465Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-05 01:40:52.306Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 01:40:52.489Z navigate
+- url: http://localhost:3000/login
+- via: replaceState
+
+## 2026-08-05 01:44:03.865Z load
+- url: http://localhost:3000/login
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 01:45:35.783Z load
+- url: http://localhost:3001/
+- title: Taxi Johor Cross Border | Johor ⟷ Singapore Taxi Service
+
+## 2026-08-05 01:45:35.871Z navigate
+- url: http://localhost:3001/
+- via: replaceState
+
+## 2026-08-05 01:45:36.848Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Portal Login"}
+
+## 2026-08-05 01:45:36.849Z navigate
+- url: http://localhost:3001/login
+- via: pushState
+
+## 2026-08-05 01:45:44.546Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Back to Taxi Service"}
+
+## 2026-08-05 01:45:44.547Z navigate
+- url: http://localhost:3001/
+- via: pushState
+
+## 2026-08-05 01:45:53.729Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Portal Login"}
+
+## 2026-08-05 01:45:53.730Z navigate
+- url: http://localhost:3001/login
+- via: pushState
+
+## 2026-08-05 01:45:54.423Z click
+- element: {"tag":"form","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Email AddressPasswordRemember me on this deviceSign In"}
+
+## 2026-08-05 01:45:54.723Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"","valueLength":0,"text":""}
+
+## 2026-08-05 01:45:54.803Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":null,"placeholder":"driver@taxijohor.com","label":"driver@taxijohor.com","value":"","valueLength":0,"text":""}
+
+## 2026-08-05 01:45:55.717Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Admin Testadmin@taxijohor.com"}
+
+## 2026-08-05 01:45:56.293Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Sign In"}
+
+## 2026-08-05 01:45:56.297Z submit
+- action: http://localhost:3001/login
+- fields: [{"label":"driver@taxijohor.com","type":"email","value":"admin@taxijohor.com","length":19,"redacted":false},{"label":"••••••••","type":"password","value":"[redacted:length=12]","length":12,"redacted":true},{"label":"Remember me on this device","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-05 01:45:56.720Z network.error
+- method: POST
+- url: https://veiigiakrhclunafkwgz.supabase.co/auth/v1/token?grant_type=password
+- status: 400
+- requestBody: {"email":"admin@taxijohor.com","password":"[redacted:length=12]","gotrue_meta_security":{}}
+- response: {"code":"invalid_credentials","message":"Invalid login credentials"}
+- durationMs: 420
+
+## 2026-08-05 01:45:56.720Z console.error
+- text: Fetch error from https://veiigiakrhclunafkwgz.supabase.co/auth/v1/token?grant_type=password: {"code":"invalid_credentials","message":"Invalid login credentials"}
+
+## 2026-08-05 01:45:56.723Z console.error
+- text: 
+    Login error: Error: Demo accounts must be seeded first. Run supabase_schema.sql in your Supabase SQL Editor if admin@taxijohor.com or driver@taxijohor.com cannot sign in. Supabase sign-in returned: Invalid login credentials
+        at Object.login (http://localhost:3001/src/services/authService.js:40:15)
+        at async login (http://localhost:3001/src/context/AuthContext.jsx:78:18)
+        at async handleSubmit (http://localhost:3001/src/pages/LoginPage.jsx:39:20)
+
